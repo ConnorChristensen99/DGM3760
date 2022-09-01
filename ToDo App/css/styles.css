@@ -5,3 +5,16 @@
 #toDo {
     background-color: bisque;
 }
+
+body {
+  display: flex;
+  justify-content: center;
+  align-content: center;
+  padding-top: 10%;
+}
+
+header {
+    font-size: 30px;
+    padding-bottom: 20px;
+}
+

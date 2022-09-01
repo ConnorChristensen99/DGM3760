@@ -1,41 +1,41 @@
-let toDoApp = {
-    name: 'dishes',
-    status: false,
-    id: 3,
-    category: "Important",
-    due: "Friday"
-}
 
-
-const myArr = Object.values(toDoApp);
-document.getElementById("todoList").innerHTML = myArr;
-
-//in class object making
-
-let albums = [
+//Starting ToDo List
+let todoArr = [
     {
-        id: 9,
-        artistName: "Green Day",
-        recordLabelID: 2
+        id: 1,
+        name: 'Dishes',
+        status: false,
+        category: "Important",
+        due: "Friday"
     },
 
     {
-        id: 10,
-        artistName: 'Eminem',
-        recordLabelID: 7
-    }
-]
-
-let recordLabel = [
-    {
         id: 1,
-        name: 'RCA'
+        name: 'Dishes',
+        status: false,
+        category: "Important",
+        due: "Friday"
     }
 ]
 
-function editAlbum() {
+
+//Should Print the ToDo in the array //Can't figure out how to not override the displayed text and instead need to add text
+for(let i = 0; i < todoArr.length; i++) {
+    listArea = document.getElementById("todoList")
+    listArea.innerHTML = Object.values(todoArr[i])
+}
+
+//Hopefully creates new todo based on user input
+const formButton = document.getElementById("submitButton");
+formButton.addEventListener(onclick, NewtoDo)
+
+function NewtoDo() {
 
 }
 
 
+
+
+
 //.map() .find()  .findIndexOf()
+
