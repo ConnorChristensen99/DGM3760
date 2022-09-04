@@ -19,12 +19,10 @@ var todoArr = [
 ]
 
 
-var img = document.createElement('img')
-img.id = "img"
 
-//Adds object to the array based on user input //Working on adding an image png when object is created to help delete items on click
+
+//Adds object to the array based on user input //Adds a delete button when a user adds a task but currently does not delete anything.
 function getValue() {
-    img.src = 'images/trash.png'
     
 
     var nameVal = document.getElementById("name").value;
@@ -32,29 +30,37 @@ function getValue() {
     var dueVal = document.getElementById("due").value;
     var statusVal = false;
 
+    var btn = document.createElement("button");
+    btn.innerHTML = "Remove ToDo";
+    btn.onclick = console.log("I work")
+
+
     let newObj = {}
     newObj.name = nameVal
     newObj.status = statusVal
     newObj.category = categoryVal
     newObj.due = dueVal
-    newObj.icon = img
 
     todoArr.push(newObj)
 
     var listItem = document.createElement('div')
     listItem.innerText = Object.values(newObj)
     listContainer.appendChild(listItem)
+    listContainer.appendChild(btn)
 
 
 }
 
 //Lets User delete a todo //Still working on this
 function deletetoDo() {
-    var element = document.getElementById("img");
-    element.remove();
 }
 
 
+//Just started this and needs to be finished
+function editAway () {
+    toEdit = document.getElementById("name");
+    toEdit.attr('contenteditable','true');
+}
 
 //Prints the initial Objects to the Array //May not need this entire code snipped moving on
 listContainer = document.getElementById("todoList")
