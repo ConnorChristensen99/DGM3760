@@ -64,3 +64,38 @@ for(const key in user) {
 //Turinary Operator
 let legal = (age >= 18) ? 'adult':'minor'
 
+
+
+//functions
+function showMessage(from, message) {
+    console.log(from + message)
+    return `${from} ${message}`
+}
+
+//default values can be set in functions to add a possible unneeded value and default to the given value if no other arg is given to fulfill it
+function showMessage(from, message = 'no text') {
+    console.log(from + message)
+    return `${from} ${message}`
+}
+
+//functions can be called without the function keyword
+const arrowExample = (from, message) => {return `${from} ${message}`}
+
+//functions can also be expressions
+const expressionExample = function (from,message) {
+    return `${from} ${message}`
+}
+
+
+//This is what the .forEach() is doing
+let myArr = [1,2,3]
+function myForEach (arr, cb) {
+    for(let i = 0; i < arr.length; i++) { 
+        cb(arr[i])
+    }
+}
+
+myForEach(myArr, (num) => {
+    console.log(num)
+})
+
