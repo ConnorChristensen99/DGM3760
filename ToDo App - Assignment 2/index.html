@@ -18,18 +18,18 @@
     <div class="wrapper">
         <header>Todo List</header>
         <div class="inputField">
-          <input type="text" placeholder="Enter new task" />
-          <button><i class="fas fa-plus"></i></button>
+          <input type="text" placeholder="Enter new task" id="inputText"/>
+          <button><i class="fas fa-plus" onclick="addToDo();"></i></button>
         </div>
-        <ul class="todoList">
-          <!-- <li class="done">
+        <ul class="todoList" id="todoList">
+           <li class="done">
             Todo Item 1 (Done example)<span> <i class="fa fa-trash"></i></span>
           </li>
           <li>
             Todo Item 2
             <span class="editBtn"><i class="fa fa-edit"></i></span>
             <span> <i class="fa fa-trash"></i></span>
-          </li> -->
+          </li>
         </ul>
         <div class="footer">
           <span>You have 1 pending tasks.</span>
