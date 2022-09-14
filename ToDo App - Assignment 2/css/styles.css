@@ -134,3 +134,10 @@ button {
   font-size: 16px;
   padding: 6px 10px;
 }
+
+body p {
+  display: flex;
+  justify-content: center;
+  margin: -5em;
+  color: white;
+}

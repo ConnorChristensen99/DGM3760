@@ -1,16 +1,61 @@
+let listContainer = document.getElementById("todoList");
+
 //Lets User add ToDos
 function addToDo() {
-    var inputVal = document.getElementById("inputText").value;
-    var listContainer = document.getElementById("todoList");
+    let inputVal = document.getElementById("inputText").value;
+
 
     let newToDo = document.createElement('li');
+    //Tried adding code here to get the trash cans to pop up
+    let buttons = document.createElement('i');
+    buttons.classList.add("fa-edit")
+    newToDo.appendChild(buttons)
 
     newToDo.textContent = inputVal;
-    newToDo.classList.add("editBtn")
-    newToDo.classList.add("fa fa-edit")
-    newToDo.classList.add("fa fa-trash")
 
     listContainer.appendChild(newToDo)
+
+    findtoDoLeft()
 }
 
 
+//Lets user click clear done button and remove objects
+function deleteCompleted() {
+    const todos = document.getElementsByClassName("done");
+    while(todos.length > 0){
+        todos[0].parentNode.removeChild(todos[0]);
+    }
+
+    findtoDoLeft()
+}
+
+
+//shows total amount of todos left. Added this function to call again in ever other function
+function findtoDoLeft(){
+    let listContainer = document.getElementById("todoList").getElementsByTagName('li').length;
+
+    numberLeft = document.getElementById('leftToDo')
+
+    numberLeft.textContent = `You have ${listContainer} remaining items left to be completed`
+}
+
+findtoDoLeft()
+
+
+//Lets user delete todo separately 
+
+
+//Lets the user complete and uncomplete tasks
+listContainer.addEventListener('click', function handleClick(event) {
+    let target = event.target
+    
+    if (event.target.classList.contains('done')) {
+        target.classList.remove('done')
+    }
+    
+    else {
+        event.target.classList.add('done')
+    }
+})
+
+//Lets User edit todo
