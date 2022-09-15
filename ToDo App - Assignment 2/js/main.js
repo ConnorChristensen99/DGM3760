@@ -6,15 +6,15 @@ function addToDo() {
 
     let newToDo = document.createElement('li');
     //Tried adding code here to get the trash cans to pop up
-    let buttons = document.createElement('i');
-    buttons.classList.add("fa-edit")
-    newToDo.appendChild(buttons)
+    if(inputVal != "") {
 
     newToDo.textContent = inputVal;
-
     listContainer.appendChild(newToDo)
 
     findtoDoLeft()
+    }else {
+        alert("Please enter a ToDo")
+    }
 }
 
 
