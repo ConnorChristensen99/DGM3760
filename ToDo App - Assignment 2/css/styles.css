@@ -31,11 +31,12 @@ button {
   background: var(--main-blue);
   color: var(--main-white);
   cursor: pointer;
+
 }
 
 .wrapper {
   margin: 120px auto;
-  max-width: 400px;
+  max-width: 800px;
   width: 100%;
   border-radius: 5px;
   background: var(--main-white);
@@ -121,6 +122,9 @@ button {
 .todoList li:hover span {
   right: 0;
 }
+.todoList li:hover {
+  background-color: antiquewhite;
+}
 
 .wrapper .footer {
   /*   width: 100%; */
@@ -140,4 +144,17 @@ body p {
   justify-content: center;
   margin: -5em;
   color: white;
+}
+
+.saveButton {
+  height: 35px;
+  width: 120px;
+  margin-top: 10px;
+  padding: 0px 5px;
+  margin: 10px;
+}
+
+.buttonz {
+  margin: 10px;
+  width: 200px;
 }

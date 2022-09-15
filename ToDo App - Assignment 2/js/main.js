@@ -1,5 +1,4 @@
 let listContainer = document.getElementById("todoList");
-
 //Lets User add ToDos
 function addToDo() {
     let inputVal = document.getElementById("inputText").value;
@@ -46,7 +45,7 @@ findtoDoLeft()
 
 
 //Lets the user complete and uncomplete tasks
-listContainer.addEventListener('click', function handleClick(event) {
+listContainer.addEventListener('dblclick', function handleClick(event) {
     let target = event.target
     
     if (event.target.classList.contains('done')) {
@@ -59,3 +58,17 @@ listContainer.addEventListener('click', function handleClick(event) {
 })
 
 //Lets User edit todo
+
+function editList() {
+    if(listContainer.contentEditable = "false") {
+        listContainer.contentEditable = true;
+        let button = document.createElement('button');
+        button.innerText = "Save Changes";
+        button.classList.add('saveButton')
+        listContainer.appendChild(button);
+
+        button.addEventListener('click', (event) => {
+            listContainer.contentEditable = false;
+            button.remove()
+        })
+}}

@@ -22,21 +22,20 @@
           <button><i class="fas fa-plus" onclick="addToDo();"></i></button>
         </div>
         <ul class="todoList" id="todoList">
-           <li class="done" id="list">
-            Todo Item 1 (Done example)<span> <i class="fa fa-trash"></i></span>
+           <li class="list">
+            Todo Item 1
           </li>
-          <li id="list">
+          <li class="list">
             Todo Item 2
-            <span class="editBtn"><i class="fa fa-edit"></i></span>
-            <span> <i class="fa fa-trash"></i></span>
           </li>
         </ul>
         <div class="footer">
           <span id="leftToDo"></span>
-          <button onclick="deleteCompleted();">Clear Done</button>
+          <button class="buttonz" onclick="deleteCompleted();">Clear Completed</button>
+          <button class="buttonz"id="todoButton" onclick="editList();">Edit ToDos</button>
         </div>
       </div>
-      <p>Hint: Click on a task to mark as done</p>
+      <p>Hint: Double Click on a task to mark/unmark as complete</p>
 
     
 </body>
