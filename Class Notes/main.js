@@ -99,3 +99,42 @@ myForEach(myArr, (num) => {
     console.log(num)
 })
 
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////
+
+//filter - assume you have an array 'wizards' filled with names and houses as objects inside
+let gryfindors = wizards.filter(wizard => {
+    return wizard.house ==="Gryfindor" //this will return true or false if they are Gryfindor as their house
+})
+gryfindors // Calling this gives the objects that are Gryfindors
+
+
+//findIndex
+let firstGryf = wizards.findIndex(wizard => wizard.house === "Gryfindor")//If you have the ID you can have this function find the ID and take it
+
+firstGryf //this will return 0 as the first person in the list is Gryfindor. THIS STOPS AT FIRST FOUND ITEM
+
+//changing array methods
+let gryfindorWizardNames = wizards.filter(wizard => wizard.house ==="Gryfindor").map(wizard => wizard.name)//this creates a new array with all students who are Gryfindors
+
+//look at makeTree - Advanced Functions Assignment //Recursive Functions will be needed
+function makeTree(arr, parent) {
+    let node = {}
+
+    return {}
+}
+
+
+let myObj = {
+    name: 'Connor'
+}
+
+myObj.name
+myObj['name']//these both return the name - showing the two ways
+
+myObj.eyeColor = 'blue'//This adds that property with that value to the object
+
+let myNewProp = 'height'
+myObj.myNewProp = 4//THIS DOESN'T WORK /THIS WILL RETURN myNewProp:4
+myObj[myNewProp] = 5//THIS IS HOW YOU DO IT /THIS RESULTS IN Height:5
