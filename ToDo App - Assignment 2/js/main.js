@@ -1,4 +1,5 @@
 let listContainer = document.getElementById("todoList");
+
 //Lets User add ToDos
 function addToDo() {
     let inputVal = document.getElementById("inputText").value;
@@ -8,7 +9,9 @@ function addToDo() {
     //Tried adding code here to get the trash cans to pop up
     if(inputVal != "") {
 
-    newToDo.textContent = inputVal;
+    newToDo.innerHTML = `${inputVal}<span> <i class="fa fa-trash"></i></span>
+    </li>`;
+
     listContainer.appendChild(newToDo)
 
     findtoDoLeft()
@@ -42,7 +45,10 @@ findtoDoLeft()
 
 
 //Lets user delete todo separately 
-
+let deleteToDo = document.getElementsByClassName('fa-trash')
+deleteToDo.addEventListener('click', event => {
+    element.remove
+})
 
 //Lets the user complete and uncomplete tasks
 listContainer.addEventListener('dblclick', function handleClick(event) {
