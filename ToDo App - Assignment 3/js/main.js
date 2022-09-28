@@ -4,34 +4,57 @@ let todos = [
     {
         todoID: 0,
         todoText: "Finish Homework",
-        todoComplete: false
+        todoComplete: false,
+        todoCategory: "School"
     },
     {
         todoID: 1,
         todoText: "Do Dishes",
-        todoComplete: false
+        todoComplete: false,
+        todoCategory: "Home"
     },
     {
         todoID: 2,
         todoText: "Wash Car",
-        todoComplete: false
+        todoComplete: false,
+        todoCategory: "Extra Work"
     }
 ]
 
 let listContainer = document.getElementById("todoList");
+let addBtn = document.querySelector('#addBtn')
+let todoInput = document.querySelector('#inputText')
+
+//Displays Todos
+function displayTodos(todos) {
+    listContainer.innerHTML = ""
+
+    todos.forEach(todo => {
+        let done = todo.todoComplete ? "done" : "";
+        let todoMarkup = `<span id="categoryTitle">${todo.todoCategory}</span> <li data-todoID = '${todo.todoID}'>${todo.todoText}</li>`
+
+        listContainer.insertAdjacentHTML('beforeend', todoMarkup)
+    })
+    findtoDoLeft()
+}
 
 //Lets User add ToDos
-function addToDo() {
-    let inputVal = document.getElementById("inputText").value;
+addBtn.addEventListener('click', event => {
+    let todoText = todoInput.value
+    addTodo(todoText)
+    displayTodos(todos)
+    findtoDoLeft()
+})
 
-
-    let newToDo = document.createElement('li');
-    //Tried adding code here to get the trash cans to pop up
-    if(inputVal != "") {
-
-    newToDo.innerText = inputVal
-
-    listContainer.appendChild(newToDo)
+function addTodo(todoText) {
+    if(todoInput != ""){
+    let newTodo = {
+        todoID: todos.length + 1,
+        todoText: todoText,
+        todoComplete: false,
+        todoCategory: categoryHolder.value
+    }
+    todos.push(newTodo)
 
     findtoDoLeft()
     }else {
@@ -39,6 +62,34 @@ function addToDo() {
     }
 }
 
+//displays categories
+let categoryHolder = document.getElementById('category')
+let categories = ['School', 'Home', 'Extra Work']
+
+categories.forEach(element => {
+
+    let categoryOption = document.createElement('option')
+    categoryOption.textContent = element
+
+    categoryHolder.appendChild(categoryOption)
+}
+    
+)
+
+
+let form = document.getElementById('categoryForm')
+function addCategory() {
+    form.classList.toggle('invisible')
+}
+
+let submitCategory = document.getElementById('submitCategory')
+let cname = document.getElementById('#cname')
+
+
+submitCategory.addEventListener('click', () => {
+    let categoryText = cname.value//////////////////////////////////////////////////////////////////////
+    console.log(categoryText)
+})
 
 //Lets user click clear done button and remove objects
 function deleteCompleted() {
@@ -62,8 +113,6 @@ function findtoDoLeft(){
 
 findtoDoLeft()
 
-
-//Lets user delete todo separately 
 
 
 //Lets the user complete and uncomplete tasks
@@ -94,3 +143,5 @@ function editList() {
             button.remove()
         })
 }}
+
+displayTodos(todos)

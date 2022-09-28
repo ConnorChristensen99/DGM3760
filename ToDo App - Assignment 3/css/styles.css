@@ -62,10 +62,12 @@ button {
   font-size: 17px;
   border-radius: 3px;
   padding-left: 15px;
+  
 }
 
-.inputField button {
-  width: 45px;
+
+#addBtn {
+  width: 65px;
   margin-left: 10px;
   font-size: 22px;
 }
@@ -157,4 +159,39 @@ body p {
 .buttonz {
   margin: 10px;
   width: 200px;
+}
+
+#categoryTitle {
+  font-weight: 800;
+}
+
+#categoryArea {
+  display: flex;
+  flex-direction: column;
+  padding: 0 5% 0 5%;
+  margin: 0 2% 0 2%;
+}
+
+#categoryArea label {
+  margin-top: -8%;
+}
+
+
+select {
+  width: 100%;
+  height: auto;
+  min-width: 10ch;
+  border: 1px solid #777;
+  border-radius: 0.25em;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+#addCategory {
+  margin-top: 8%;
+}
+
+
+.invisible {
+  visibility: hidden;
 }

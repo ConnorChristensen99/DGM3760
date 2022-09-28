@@ -162,14 +162,14 @@ let addBtn = document.querySelector('#addBtn')
 addBtn.addEventListener('click', event => {
     let todoText = todoInput.value
     addTodo(todoText)
-    renderTodos(todos)
+    displayTodos(todos)
 })
 
 todoUL.addEventListener('click', (event) => {
     console.log(event.target.dataset.todoid)
     let todoID = event.target.dataset.todoid
     completeTodo(todoID)
-    renderTodos(todos)
+    displayTodos(todos)
 })
 
 function completeTodo(id) {
