@@ -21,7 +21,12 @@
         <div class="inputField">
           <input type="text" placeholder="Enter new task" id="inputText"/> <div id='categoryArea'><label>Category:</label><select id="category" name="category"></select> 
 
-            <button id="addCategory" class="popup" onclick="addCategory()"><i class="fas fa-plus"></i></button></div>
+            <div id="editButton">
+            <button id="addCategory" class="popup" onclick="addCategory()"><i class="fas fa-plus"></i></button>
+            <button id="editCategory" class="popup" onclick="editCategory()">Edit</button>
+          </div>
+          </div>
+          
 
           <button id="addBtn"><i class="fas fa-plus"></i></button>
 
@@ -32,9 +37,14 @@
 
         <form id="categoryForm" class="invisible">
           <label for="name">Category Name</label><br>
-          <input type="text" id="cname" name="cname"><br>
+          <input type="text" placeholder="Enter new category" id="cname"/><br>
           <button type="button" id="submitCategory">Submit</button>
         </form>
+
+        <ul class="invisible" id="editcategoryForm">
+          
+        <button type="button" id="submiteditcategoryForm">Submit</button>
+        </ul>
 
         <div class="footer">
           

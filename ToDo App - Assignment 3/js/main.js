@@ -77,19 +77,61 @@ categories.forEach(element => {
 )
 
 
+//Lets user add new categories
 let form = document.getElementById('categoryForm')
 function addCategory() {
     form.classList.toggle('invisible')
 }
 
 let submitCategory = document.getElementById('submitCategory')
-let cname = document.getElementById('#cname')
+let cname = document.getElementById('cname')
 
 
 submitCategory.addEventListener('click', () => {
-    let categoryText = cname.value//////////////////////////////////////////////////////////////////////
-    console.log(categoryText)
+    let categoryText = cname.value
+    form.classList.toggle('invisible')
+    
+    let categoryOption = document.createElement('option')
+    categoryOption.textContent = categoryText
+
+    categoryHolder.appendChild(categoryOption)
+
 })
+
+//lets user edit categories for todos
+let form2 = document.getElementById('editcategoryForm')
+function editCategory() {
+    form2.innerHTML = ""
+
+    let submitbutton = document.createElement('button')
+    submitbutton.innerText = 'Submit'
+    form2.appendChild(submitbutton);
+    submitbutton.addEventListener('click', () => {
+        form2.classList.toggle('invisible')
+    
+    })
+
+    todos.forEach(todo => {
+        let todoCategories = `<span id="categoryTitle">${todo.todoCategory}</span>`
+
+        form2.insertAdjacentHTML('beforeend', todoCategories)
+    })
+    form2.classList.toggle('invisible')
+
+    if(form2.contentEditable = "false") {
+        form2.contentEditable = true;
+        let button = document.createElement('button');
+        button.innerText = "Save Changes";
+        button.classList.add('saveButton')
+        form2.appendChild(button);
+
+        button.addEventListener('click', (event) => {
+            form2.contentEditable = false;
+            button.remove()
+        })
+}
+  
+}
 
 //Lets user click clear done button and remove objects
 function deleteCompleted() {

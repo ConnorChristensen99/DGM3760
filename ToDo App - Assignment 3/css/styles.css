@@ -107,6 +107,7 @@ button {
   border-radius: 0 3px 3px 0;
   cursor: pointer;
   transition: all 0.3s ease;
+
 }
 
 .todoList li span.editBtn {
@@ -119,6 +120,10 @@ button {
 
   cursor: pointer;
   transition: all 0.3s ease;
+}
+
+.todoList {
+  margin-top: 5%;
 }
 
 .todoList li:hover span {
@@ -176,6 +181,30 @@ body p {
   margin-top: -8%;
 }
 
+#submitCategory {
+  padding: 1%;
+  margin-top: 2%;
+}
+
+#categoryForm, #editcategoryForm {
+  position:absolute;
+  top:40%;
+  left:36%;
+  z-index:1002;
+  margin-left:-200px;
+  margin-top:-200px;
+  background-color: #86c6f4;
+  width: 50%;
+  padding: 1% 2% 2% 2%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  box-shadow: 0 0 3px #b8adad, 0 0 5px #3b3b3b;
+}
+
+#categoryForm label {
+  font-size: larger;
+}
 
 select {
   width: 100%;
@@ -187,11 +216,23 @@ select {
   font-size: 1rem;
 }
 
-#addCategory {
-  margin-top: 8%;
-}
-
 
 .invisible {
   visibility: hidden;
+}
+
+.popup:hover {
+  background-color: #16843b;
+}
+
+#editButton {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.popup {
+  margin: 5%;
+  width: 100%;
+  height: auto;
 }
