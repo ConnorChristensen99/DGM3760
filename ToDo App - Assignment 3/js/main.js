@@ -64,7 +64,7 @@ function addTodo(todoText) {
 
 //displays categories
 let categoryHolder = document.getElementById('category')
-let categories = ['School', 'Home', 'Extra Work']
+let categories = []
 
 categories.forEach(element => {
 
@@ -93,6 +93,7 @@ submitCategory.addEventListener('click', () => {
     
     let categoryOption = document.createElement('option')
     categoryOption.textContent = categoryText
+    categories.push(categoryOption.value)
 
     categoryHolder.appendChild(categoryOption)
 
@@ -103,20 +104,13 @@ let form2 = document.getElementById('editcategoryForm')
 function editCategory() {
     form2.innerHTML = ""
 
-    let submitbutton = document.createElement('button')
-    submitbutton.innerText = 'Submit'
-    form2.appendChild(submitbutton);
-    submitbutton.addEventListener('click', () => {
-        form2.classList.toggle('invisible')
-    
-    })
-
-    todos.forEach(todo => {
-        let todoCategories = `<span id="categoryTitle">${todo.todoCategory}</span>`
-
+    for (i=0;i<categories.length; i++) {
+        let todoCategories = `<span id='[${i}]'>${categories[i]}</span>`
         form2.insertAdjacentHTML('beforeend', todoCategories)
-    })
+    }
+
     form2.classList.toggle('invisible')
+    
 
     if(form2.contentEditable = "false") {
         form2.contentEditable = true;
@@ -130,6 +124,21 @@ function editCategory() {
             button.remove()
         })
 }
+
+let submitbutton = document.createElement('button')
+submitbutton.innerText = 'Submit'
+form2.appendChild(submitbutton);
+submitbutton.addEventListener('click', () => {
+    form2.classList.toggle('invisible')
+
+      
+    let newCategories = categories.map((element) => {
+        let elementModified = element.span.input
+        return elementModified
+    })
+
+    console.log(newCategories)
+})
   
 }
 
