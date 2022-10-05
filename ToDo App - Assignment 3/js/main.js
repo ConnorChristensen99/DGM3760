@@ -137,7 +137,10 @@ submitbutton.addEventListener('click', () => {
 
     for(i=0; i<categoryHolder; i++) {
         let newCategoryq = document.getElementById('newCategory').innerHTML
-        console.log(newCategoryq)
+        let newCategoryList = []
+
+        newCategoryList.appendChild(newCategoryq)
+        console.log(newCategoryList)
     }
     
 
