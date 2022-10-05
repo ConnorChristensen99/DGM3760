@@ -105,7 +105,7 @@ function editCategory() {
     form2.innerHTML = ""
 
     for (i=0;i<categories.length; i++) {
-        let todoCategories = `<span id='[${i}]'>${categories[i]}</span>`
+        let todoCategories = `<span id='newCategory'>${categories[i]}</span>`
         form2.insertAdjacentHTML('beforeend', todoCategories)
     }
 
@@ -125,19 +125,22 @@ function editCategory() {
         })
 }
 
+
+
+
+
 let submitbutton = document.createElement('button')
 submitbutton.innerText = 'Submit'
 form2.appendChild(submitbutton);
 submitbutton.addEventListener('click', () => {
     form2.classList.toggle('invisible')
 
-      
-    let newCategories = categories.map((element) => {
-        let elementModified = element.span.input
-        return elementModified
-    })
+    for(i=0; i<categoryHolder; i++) {
+        let newCategoryq = document.getElementById('newCategory').innerHTML
+        console.log(newCategoryq)
+    }
+    
 
-    console.log(newCategories)
 })
   
 }
