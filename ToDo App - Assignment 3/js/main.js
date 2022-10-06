@@ -66,15 +66,21 @@ function addTodo(todoText) {
 let categoryHolder = document.getElementById('category')
 let categories = []
 
-categories.forEach(element => {
-
-    let categoryOption = document.createElement('option')
-    categoryOption.textContent = element
-
-    categoryHolder.appendChild(categoryOption)
-}
+function displayCategories() {
     
-)
+    categories.forEach(element => {
+
+        let categoryOption = document.createElement('option')
+        categoryOption.textContent = element
+    
+        categoryHolder.appendChild(categoryOption)
+    
+    }
+        
+    )
+   
+}
+
 
 
 //Lets user add new categories
@@ -101,6 +107,8 @@ submitCategory.addEventListener('click', () => {
 
 //lets user edit categories for todos
 let form2 = document.getElementById('editcategoryForm')
+let newCategoryList = []
+
 function editCategory() {
     form2.innerHTML = ""
 
@@ -122,6 +130,7 @@ function editCategory() {
         button.addEventListener('click', (event) => {
             form2.contentEditable = false;
             button.remove()
+            
         })
 }
 
@@ -133,16 +142,23 @@ let submitbutton = document.createElement('button')
 submitbutton.innerText = 'Submit'
 form2.appendChild(submitbutton);
 submitbutton.addEventListener('click', () => {
-    form2.classList.toggle('invisible')
+form2.classList.toggle('invisible')
+categoryHolder.innerText = ''
 
-    for(i=0; i<categoryHolder; i++) {
-        let newCategoryq = document.getElementById('newCategory').innerHTML
-        let newCategoryList = []
+for (let i=0; i<categories.length; i++) {
+    let newCategoryq = document.getElementById('newCategory').innerHTML
+    newCategoryList.push(newCategoryq)
+    console.log(newCategoryList)
+    console.log(i)
 
-        newCategoryList.appendChild(newCategoryq)
-        console.log(newCategoryList)
-    }
+    categories.splice(0, categories.length, ...newCategoryList)
+
+
+    displayCategories(categories)
+
     
+}
+
 
 })
   

@@ -207,9 +207,43 @@ function displayTodos(todos) {
 
 //Rest API show you a representation of the app and not the base look
 
+let categories = [...new Set(initialTodos.map(todo => todo.category))]
+    .map((cat,idx) => ({
+        category: cat,
+        id: idx,
+        selected: false
+    }))
+
+//Node takes the JS language and stick it into a different runtime meaning it takes all the code out of the browser and stick it into your OS
+//server code
+const express = require('express')
+const app = express()
+const port = 8000
 
 
+app.get('/todos', (req, res) => {
+    res.send(Todos)
+})
 
+app.post('/todos', (req, res) => {
+    todos.push( {
+        is: 4,
+        todo: req.query.todo,
+        complete: false,
+        category: 'none'
+    })
+
+})
+
+//js code //instead of displaying todos, you need to call this and do getTodos().then(todos => {displayTodos(todos)})
+async function getTodos() {
+    let response = await fetch('/todos')
+    let data = await response.json()
+
+    return data
+}
+
+//create a folder named "client" with the html and all JS files in it. Next serve a static folder from express "app.use(express.static('public'))"
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 
