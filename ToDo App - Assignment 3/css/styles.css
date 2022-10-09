@@ -38,10 +38,14 @@ button {
   margin: 120px auto;
   max-width: 800px;
   width: 100%;
+  height: auto;
   border-radius: 5px;
   background: var(--main-white);
   padding: 25px;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
 }
+
 
 .wrapper header {
   font-size: 30px;
@@ -243,12 +247,15 @@ select {
   margin: 5px;
 }
 
+#editcategoryForm p{
+  color: #3b3b3b;
+  margin: 5px;
+  padding-top: 2%;
+}
+
 
 span {
   display: flex;
   padding: 5px;
 }
 
-span #categoryImage {
-  transform: translateX(540px);
-}

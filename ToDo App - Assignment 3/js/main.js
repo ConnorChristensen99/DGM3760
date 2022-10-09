@@ -31,7 +31,7 @@ function displayTodos(todos) {
 
     todos.forEach(todo => {
         let done = todo.todoComplete ? "done" : "";
-        let todoMarkup = `<span id="categoryTitle">${todo.todoCategory}</span> <li data-todoID = '${todo.todoID}'>${todo.todoText}</li>`
+        let todoMarkup = `<div id="C${todo.todoID}><span id="categoryTitle">${todo.todoCategory}</span> <li data-todoID = '${todo.todoID}'>${todo.todoText}</li></div>`
 
         listContainer.insertAdjacentHTML('beforeend', todoMarkup)
     })
@@ -64,7 +64,7 @@ function addTodo(todoText) {
 
 //displays categories
 let categoryHolder = document.getElementById('category')
-let categories = []
+let categories = ["School","Home","Extra Work"]
 
 function displayCategories() {
     
@@ -80,7 +80,7 @@ function displayCategories() {
     )
    
 }
-
+displayCategories(categories)
 
 
 //Lets user add new categories
@@ -114,8 +114,9 @@ function editCategory() {
     form2.innerHTML = ""
     categoryHolder.innerText = ""
 
+
     for (i=0;i<categories.length; i++) {
-        let todoCategories = `<span id='${i}'>${categories[i]}</span> `
+        let todoCategories = `<span id='${i}'>${categories[i]}</span>`
         form2.insertAdjacentHTML('beforeend', todoCategories)
     }
 
@@ -125,7 +126,8 @@ function editCategory() {
         let target = event.target
         targetID = target.id
         
-    
+        target.remove()
+        categories.splice(targetID, 1)
     })
     
 
@@ -150,28 +152,34 @@ function editCategory() {
 let submitbutton = document.createElement('button')
 submitbutton.innerText = 'Submit'
 form2.appendChild(submitbutton);
+
 submitbutton.addEventListener('click', () => {
 form2.classList.toggle('invisible')
 
 for (let i=0; i<categories.length; i++) {
-    let newCategoryq = document.getElementById(`${i}`).innerHTML
-    newCategoryList.push(newCategoryq)
-    console.log(newCategoryList)
+        let newCategoryq = document.getElementById(`${i}`).innerHTML
+        newCategoryList.push(newCategoryq)
+    
 }
 
 categories.splice(0, categories.length, ...newCategoryList)
 displayCategories(categories)
 
-
 })
+
+
+let formP = document.createElement('p')
+formP.textContent = "Double Click on a Category to remove it"
   
+form2.appendChild(formP)
+
 }
 
 //Lets user click clear done button and remove objects
 function deleteCompleted() {
     const todos = document.getElementsByClassName("done");
     while(todos.length > 0){
-        todos[0].parentNode.removeChild(todos[0]);
+        todos[0].remove();
     }
 
     findtoDoLeft()
