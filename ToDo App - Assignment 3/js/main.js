@@ -107,17 +107,26 @@ submitCategory.addEventListener('click', () => {
 
 //lets user edit categories for todos
 let form2 = document.getElementById('editcategoryForm')
-let newCategoryList = []
+
 
 function editCategory() {
+    let newCategoryList = []
     form2.innerHTML = ""
+    categoryHolder.innerText = ""
 
     for (i=0;i<categories.length; i++) {
-        let todoCategories = `<span id='newCategory'>${categories[i]}</span>`
+        let todoCategories = `<span id='${i}'>${categories[i]}</span> `
         form2.insertAdjacentHTML('beforeend', todoCategories)
     }
 
     form2.classList.toggle('invisible')
+
+    form2.addEventListener('dblclick', function handleClick(event) {
+        let target = event.target
+        targetID = target.id
+        
+    
+    })
     
 
     if(form2.contentEditable = "false") {
@@ -143,21 +152,15 @@ submitbutton.innerText = 'Submit'
 form2.appendChild(submitbutton);
 submitbutton.addEventListener('click', () => {
 form2.classList.toggle('invisible')
-categoryHolder.innerText = ''
 
 for (let i=0; i<categories.length; i++) {
-    let newCategoryq = document.getElementById('newCategory').innerHTML
+    let newCategoryq = document.getElementById(`${i}`).innerHTML
     newCategoryList.push(newCategoryq)
     console.log(newCategoryList)
-    console.log(i)
-
-    categories.splice(0, categories.length, ...newCategoryList)
-
-
-    displayCategories(categories)
-
-    
 }
+
+categories.splice(0, categories.length, ...newCategoryList)
+displayCategories(categories)
 
 
 })

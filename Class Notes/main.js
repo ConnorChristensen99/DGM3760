@@ -204,6 +204,20 @@ function displayTodos(todos) {
 
 
 //////////////////////////////////////////////////////////////////////////////////////////////
+//NODE TUTORIAL
+const http = require('http')
+
+const hostname = '127.0.0.1'
+const port2 = 8000
+
+const server = http.createServer((req, res) => { //we are saying we are expecting a request and response
+    res.statusCode = 200
+    res.end('Hello World')
+})
+
+server.listen(port2, hostname, () => {
+    console.log('server running')
+})
 
 //Rest API show you a representation of the app and not the base look
 
@@ -220,6 +234,15 @@ const express = require('express')
 const app = express()
 const port = 8000
 
+app.get('/', (req, res) => {
+    res.send('Hello World')
+})
+
+app.listen(port, () => {
+    console.log('Example Running')
+
+})
+
 
 app.get('/todos', (req, res) => {
     res.send(Todos)
@@ -227,7 +250,7 @@ app.get('/todos', (req, res) => {
 
 app.post('/todos', (req, res) => {
     todos.push( {
-        is: 4,
+        id: 4,
         todo: req.query.todo,
         complete: false,
         category: 'none'
@@ -243,7 +266,6 @@ async function getTodos() {
     return data
 }
 
-//create a folder named "client" with the html and all JS files in it. Next serve a static folder from express "app.use(express.static('public'))"
 
 //////////////////////////////////////////////////////////////////////////////////////////////
 

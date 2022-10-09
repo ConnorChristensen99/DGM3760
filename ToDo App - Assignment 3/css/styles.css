@@ -242,3 +242,13 @@ select {
   border: #3b3b3b solid 1px;
   margin: 5px;
 }
+
+
+span {
+  display: flex;
+  padding: 5px;
+}
+
+span #categoryImage {
+  transform: translateX(540px);
+}
