@@ -159,11 +159,11 @@ form2.classList.toggle('invisible')
 
 for (let i=0; i<categories.length; i++) {
         let newCategoryq = document.getElementById(`${i}`).innerHTML
-        newCategoryList.push(newCategoryq)
+        categories.splice(i, 1, newCategoryq)
     
 }
 
-categories.splice(0, categories.length, ...newCategoryList)
+
 displayCategories(categories)
 
 })
