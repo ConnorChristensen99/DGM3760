@@ -60,6 +60,7 @@ function addTodo(todoText) {
     }else {
         alert("Please enter a ToDo")
     }
+
 }
 
 //displays categories
@@ -229,3 +230,4 @@ function editList() {
 }}
 
 displayTodos(todos)
+
