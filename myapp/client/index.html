@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="src/styles.css">
+    <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+
+    <title>Todo App</title>
+
+</head>
+
+<body id="body">
+
+    <div class="wrapper">
+        <header>Todo List</header>
+
+        <div class="inputField">
+          <input type="text" placeholder="Enter new task" id="inputText"/> <div id='categoryArea'><label>Category:</label><select id="category" name="category"></select> 
+
+            <div id="editButton">
+            <button id="addCategory" class="popup" onclick="addCategory()"><i class="fas fa-plus"></i></button>
+            <button id="editCategory" class="popup" onclick="editCategory()">Edit</button>
+          </div>
+          </div>
+          
+
+          <button id="addBtn"><i class="fas fa-plus"></i></button>
+
+        </div>
+
+        <ul class="todoList" id="todoList">
+        </ul>
+
+        <form id="categoryForm" class="invisible">
+          <label for="name">Category Name</label><br>
+          <input type="text" type="reset" placeholder="Enter new category" id="cname"/><br>
+          <button type="button" id="submitCategory">Submit</button>
+        </form>
+
+        <ul class="invisible" id="editcategoryForm">
+          
+        <button type="button" id="submiteditcategoryForm">Submit</button>
+        </ul>
+
+        <div class="footer">
+          
+          <span id="leftToDo"></span>
+          <button class="buttonz" onclick="deleteCompleted();">Clear Completed</button>
+          <button class="buttonz"id="todoButton" onclick="editList();">Edit ToDos</button>
+        </div>
+      </div>
+      <p>Hint: Double Click on a task to mark/unmark as complete</p>
+
+    
+</body>
+
+<script type="text/javascript" src="src/main.js"></script>
+
+</html>
