@@ -24,7 +24,7 @@ async function getTodos() {
     let response = await fetch('/todos')
     let data = await response.json()
 
-    return data //Use the .then() to get the data
+    return data 
 }
 
 let listContainer = document.getElementById("todoList");

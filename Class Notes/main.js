@@ -1,3 +1,5 @@
+import mongoose from 'mongoose'
+
 //Primitive
 let myName = 'Landon'
 
@@ -274,7 +276,70 @@ app.post('/todos', (req, res) => {
 
 })
 
-//////////////////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////DATABASES///////////////////////////////////////////////////////////
+
+// const { MongoClient, ServerApiVersion } = require('mongodb');
+// const uri = "mongodb+srv://ConnMann99:spudwebb11@tododb.tklpuc8.mongodb.net/?retryWrites=true&w=majority";
+// const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
+// client.connect(err => {
+//   const collection = client.db("test").collection("devices");
+//   // perform actions on the collection object
+//   client.close();
+// });
+
+
+//const mongoose = require('mongoose');
+// const uri = "mongodb+srv://ConnMann99:spudwebb11@tododb.tklpuc8.mongodb.net/?retryWrites=true&w=majority";
+// mongoose.connect(
+//     uri,
+//     {
+//         useNewUrlParser: true
+//     }
+// )
+//.then(e => console.log('MongoDB Ready!'))
+//.catch(console.error)
+
+
+
+
+/////THIS SHOULD BE IN A NEW "user.js" FILE//////////
+// const {model, Schema} = require('mongoose')
+
+// const User = new Schema({
+//     firstName: String,
+//     middleName: {
+//         type: String,
+//         default: ""
+//     },
+//     lastName: String,
+//     age: Number,
+//     email: {
+//         type: String,
+//         required: true
+//     }
+// })
+
+// module.exports = model('user', User)
+
+
+
+
+/////////////This goes in a newUser.js file//////////////////////////////////////
+// const User = require('./user')
+
+// const newUser = new User({
+//     firstName: "Connor",
+//     middleName: "James",
+//     lastName: "Christensen",
+//     age: 23,
+//     email: "connorwra3@gmail.com"
+// })
+
+// newUser.save().then(doc => {
+//     console.log("New User Saved")
+// })
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
