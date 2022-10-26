@@ -276,10 +276,13 @@ app.post('/todos', (req, res) => {
 
 })
 
-///////////////////////////////////DATABASES///////////////////////////////////////////////////////////
+
+
+
+///////////////////////////////////DATABASES/////////////////////////////////////////////////////////// ///ALL OF THESE GO IN YOUR SERVER FILE WHERE YOU HAVE THE API CALLS
 
 // const { MongoClient, ServerApiVersion } = require('mongodb');
-// const uri = "mongodb+srv://ConnMann99:spudwebb11@tododb.tklpuc8.mongodb.net/?retryWrites=true&w=majority";
+// const uri = "process.env.MONGO_URI";
 // const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 // client.connect(err => {
 //   const collection = client.db("test").collection("devices");
@@ -288,8 +291,21 @@ app.post('/todos', (req, res) => {
 // });
 
 
+
+
+///This goes at the top of your server file
+
 //const mongoose = require('mongoose');
-// const uri = "mongodb+srv://ConnMann99:spudwebb11@tododb.tklpuc8.mongodb.net/?retryWrites=true&w=majority";
+//require('dotenv').config();
+//require('./createUser')
+//require('./query')
+//require('./update')
+//require('./delete')
+
+
+//const uri = process.env.MONGO_URI;
+
+
 // mongoose.connect(
 //     uri,
 //     {
@@ -298,6 +314,8 @@ app.post('/todos', (req, res) => {
 // )
 //.then(e => console.log('MongoDB Ready!'))
 //.catch(console.error)
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
@@ -322,6 +340,7 @@ app.post('/todos', (req, res) => {
 // module.exports = model('user', User)
 
 
+///////////////////////////////////////////////////////
 
 
 /////////////This goes in a newUser.js file//////////////////////////////////////
@@ -339,7 +358,121 @@ app.post('/todos', (req, res) => {
 //     console.log("New User Saved")
 // })
 
+
+//////////////////////////////////////////////////////////////////////////////////
+
+
+
+/////////////This goes in a query.js file////This pulls from the database//////////////////////////////////
+// const User = require('./user')
+
+// const findAllUsers = async() => {
+//     const allUsers = await User.find()
+//     console.log(allUsers)
+// }
+
+// findAllUsers()
+
+// const findUserByName = async(firstName) => {
+//     const users = await User.find({firstName})
+
+//      console.log(users)
+// }
+
+//findUserByName("Landon")
+
+
+
+////////////////////////////////////////////////////////////////////////////
+
+
+
+/////////////This goes in a update.js file////This updates the database//////////////////////////////////
+// const User = require('./user')
+
+// const incrementAge = async(firstName) => {
+//     const user = await User.findOne({firstName})
+
+//     if(!user) {
+//         throw new Error('User not Found!')
+//     }
+
+//     user.age++
+
+//     const result = await user.save()
+
+    // console.log(result)
+// }
+
 ///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+/////////////This goes in a delete.js file////This deletes items in the database//////////////////////////////////
+// const User = require('./user')
+
+// const deleteUserByFirstName = async(firstName) => {
+//     await User.deleteOne({firstName})//won't run unless in database
+
+//     const allUsers = User.find()
+
+//     console.log(allUsers)
+// }
+
+///////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
