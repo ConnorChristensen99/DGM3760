@@ -3,6 +3,12 @@ const bodyParser = require('body-parser')
 const app = express()
 const port = 8000
 
+app.use(express.static('client'))
+app.use(bodyParser.json() );       // to support JSON-encoded bodies
+app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+  extended: true
+})); 
+
 
 // const { MongoClient, ServerApiVersion } = require('mongodb');
 // const uri = "process.env.MONGO_URI";
@@ -125,11 +131,11 @@ const port = 8000
 
 
 
-app.use(express.static('client'))
-app.use(bodyParser.json() );       // to support JSON-encoded bodies
-app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
-  extended: true
-})); 
+
+
+
+
+
 
 let todos = [
     {
@@ -153,6 +159,9 @@ let todos = [
 ]
 
 let categories = ["School","Home","Extra Work"]
+
+
+
 
 ///////ToDos////////
 app.get('/todos', (req, res) => {//If I see a get request here then I will run this function
@@ -200,6 +209,7 @@ app.delete('/todos', (req, res) => {
 app.get('/categories', (req, res) => {
     res.send(categories)
 })
+
 
 app.post('/categories', (req, res) => {
     const category = req.body.category
