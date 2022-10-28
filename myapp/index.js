@@ -186,7 +186,7 @@ app.put('/todos', (req, res) => {
     const todo = req.body.id
     const todoText = req.body.todo
 
-    let tobeUpdated = todos.findIndex(todo)
+    let tobeUpdated = todos.find(todo)
 
     todos.splice(tobeUpdated, 1, todoText)
 
@@ -198,12 +198,17 @@ app.put('/todos', (req, res) => {
 
 app.delete('/todos', (req, res) => {
     const todo = req.body.id
-    let tobeDeleted = todos.findIndex(todo)
+    let tobeDeleted = todos.find(todo)
 
     todos.splice(tobeDeleted, 1)
 
     res.send(todos)
+
 })
+
+
+
+
 
 ///////Categories////////
 app.get('/categories', (req, res) => {
@@ -223,7 +228,7 @@ app.put('/categories', (req, res) => {
     const category = req.body.id
     const categoryText = req.body.category
 
-    let tobeUpdated = categories.findIndex(category)
+    let tobeUpdated = categories.find(category)
 
     categories.splice(tobeUpdated, 1, categoryText)
 
@@ -236,7 +241,7 @@ app.put('/categories', (req, res) => {
 
 app.delete('/categories', (req, res) => {
     const category = req.body.id
-    let tobeDeleted = categories.findIndex(category)
+    let tobeDeleted = categories.find(category)
 
     categories.splice(tobeDeleted, 1)
 
@@ -247,3 +252,7 @@ app.delete('/categories', (req, res) => {
 
 
 
+
+app.listen(port, () => {
+    console.log("It's Go Time")
+})

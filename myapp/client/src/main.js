@@ -43,7 +43,7 @@ function displayTodos(todos) {
 
     todos.forEach(todo => {
         let done = todo.todoComplete ? "done" : "";
-        let todoMarkup = `<div id="C${todo.todoID}><span id="categoryTitle">${todo.todoCategory}</span> <li id = 'T${todo.todoID}'>${todo.todoText}</li></div>`
+        let todoMarkup = `<div id="${todo.todoID}><span id="categoryTitle">${todo.todoCategory}</span> <li id = '${todo.todoID}'>${todo.todoText}</li></div>`
 
         listContainer.insertAdjacentHTML('beforeend', todoMarkup)
     })
@@ -63,17 +63,17 @@ addBtn.addEventListener('click', event => {
 })
 
 function addTodo(todoText) {
-        // fetch('/todos', {
-        //     method: 'POST',
-        //     body: JSON.stringify({todo: todoText, todoCategory: categoryHolder.value}),
-        //     headers: {
-        //         'Content-Type': 'application/json'
-        //     }
-        // })
-        // .then(res => res.json())
-        // .then(data =>  {
-        //     displayTodos(data)
-        // })
+        fetch('/todos', {
+            method: 'POST',
+            body: JSON.stringify({todo: todoText, todoCategory: categoryHolder.value}),
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(res => res.json())
+        .then(data =>  {
+            displayTodos(data)
+        })
         findtoDoLeft()
 }
 
@@ -239,34 +239,29 @@ form2.appendChild(formP)
 //Lets user click clear done button and remove objects
 function deleteCompleted() {
     const todos = document.getElementsByClassName("done"); //check if item contains class done and delete if it does
-    while(todos.length > 0){
-        todos[0].remove();
-    }
 
-    findtoDoLeft()
+//         for(i=0; i < todos.length; i++){
+//         let badTodo = todos[i].id
+//         console.log(badTodo)
 
-    // fetch('/todos', {
-    //     method: 'DELETE',
-    //     headers: {
-    //         'Content-Type': 'application/json'
-    //     },
-    //     body: JSON.stringify(todos.classList.contains("done"))
-    // })
-    // .then(res => res.json())
-    // .then(data =>  {
-    //     displayTodos(data)
-    // })
+//         fetch('/todos', {
+//             method: 'DELETE',
+//             body: JSON.stringify({id: badTodo}),
+//             headers: {
+//                 'Content-Type': 'application/json'
+//             }
+//         })
+//         .then(res => res.json())
+//         .then(data =>  {
+            
+//             displayTodos(data)
+//         })
+    
+// }
+//     findtoDoLeft()
 
-
-
-    // for(let i=0; i<todos.length; i++) {
-//     let doneItems = document.getElementsByTagName('li')
-//     // if(li.classList.contains('done')) {
-//     //     console.log(li)
-//     // }
-//     console.log(doneItems)
-// }///Trying to get the done items so we can target those to remove them from the API
 }
+
 
 
 
@@ -315,6 +310,12 @@ listContainer.addEventListener('dblclick', function handleClick(event) {
 //Lets User edit todo
 
 function editList() {
+
+    ///Try looping through all items in the list and taking the text content and replacing
+    ///it with the current content on the other side via ID. So whatever the input is on save then
+    ///loop through and change the text content via id
+
+
 
     // fetch('/todos', {
     //     method: 'PUT',
