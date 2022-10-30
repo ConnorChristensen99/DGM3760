@@ -1,0 +1,169 @@
+
+/* MAIN CSS STYLING */
+:root {
+    --main-purp: #334069;
+    --main-white: #fff;
+    --main-yellow: #e2d756;
+  }
+
+  * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+  }
+
+
+
+
+/* BODY STYLING */
+  body {
+    height: 100vh;
+    width: 100%;
+    background: var(--main-purp);
+  }
+
+  .wrapper {
+    margin: 120px auto;
+    max-width: 800px;
+    width: 100%;
+    height: auto;
+    border-radius: 5px;
+    background: var(--main-white);
+    padding: 25px;
+    padding-bottom: 100px;
+  }
+
+  .wrapper header {
+    font-size: 18px;
+    font-weight: 600;
+  }
+  
+
+
+
+
+  /* NAV STYLING */
+  ul {
+    list-style-type: none;
+    margin-top: 10px;
+    margin-bottom: 40px;
+    overflow: hidden;
+    background-color: #333;
+  }
+  
+  li {
+    float: left;
+  }
+  
+  li a {
+    display: block;
+    color: var(--main-white);
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  li a:hover {
+    background-color: #111;
+  }
+
+  .active {
+    background-color: #04AA6D;
+  }
+
+
+
+/* Add Interested Styling */
+#addInterested {
+    display: flex;
+    justify-content: space-between;
+    padding-right: 5%;
+    padding-bottom: 5%;
+}
+
+#addInterested a:visited {
+    color: var(--main-yellow)
+}
+
+  /* Interested Book Cards */
+
+  .newInterested {
+    padding: 0% 0% 5% 0%;
+    display: flex;
+  }
+
+  .newInterestedInfo {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .newInterested .interestedIcon {
+    float: right;
+    padding: 2%;
+    padding-top: 8%;
+  }
+
+  .newInterested a:visited { 
+    color: black; 
+   }
+
+  .interestedImage {
+    float: left;
+    margin: 20px;
+    width: 90px;
+    height: auto;
+  }
+
+  .interestedIcon {
+    display: flex;
+    flex-direction: column;
+  }
+
+
+
+  /* Review Page Styling */
+  #addReview {
+    display: flex;
+    justify-content: space-between;
+    padding-right: 5%;
+    padding-bottom: 5%;
+}
+
+#addReview a:visited {
+    color: var(--main-yellow)
+}
+
+
+  .newReview {
+    margin-bottom: 5px;
+    padding: 2% 0% 5% 0%;
+    display: flex;
+    border: #111 1px solid;
+  }
+
+  .newReviewInfo {
+    display: flex;
+    flex-direction: column;
+  }
+
+
+  .reviewImage {
+    float: left;
+    margin: 20px;
+    width: 90px;
+    height: auto;
+  }
+
+  .rating {
+    padding-top: 2%;
+    display: flex;
+    width: 180px;
+ }
+ 
+ .rating__star {
+    cursor: pointer;
+    color: #dabd18b2;
+ }
+ 
+
