@@ -9,6 +9,13 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
   extended: true
 })); 
 
+const cors = require('cors')
+
+
+app.use(cors({
+ origin: '*'
+}))
+
 
 // const { MongoClient, ServerApiVersion } = require('mongodb');
 // const uri = "process.env.MONGO_URI";
@@ -158,7 +165,7 @@ let todos = [
     }
 ]
 
-let categories = ["School","Home","Extra Work"]
+let categories = []
 
 
 
@@ -197,7 +204,7 @@ app.put('/todos', (req, res) => {
 
 
 app.delete('/todos', (req, res) => {
-    const todo = req.body.id
+    const todo = req.body.todoID
     let tobeDeleted = todos.find(todo)
 
     todos.splice(tobeDeleted, 1)
@@ -217,12 +224,17 @@ app.get('/categories', (req, res) => {
 
 
 app.post('/categories', (req, res) => {
-    const category = req.body.category
-    categories.push(category)
+    console.log(req.body.category)
+    const newCategory = req.body.category
+    categories.push(newCategory)
+
+    
 
     res.send(categories)
 
+    console.log(categories)
 })
+
 
 app.put('/categories', (req, res) => {
     const category = req.body.id

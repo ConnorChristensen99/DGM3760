@@ -20,11 +20,23 @@ let todos = [
         todoCategory: "Extra Work"
     }
 ]
+
+let categories = []
+
+
+
 async function getTodos() {
     let response = await fetch('/todos')
     let data = await response.json()
 
-    return data 
+    return data; 
+}
+
+async function getCategories() {
+    let response = await fetch('/categories')
+    let data = await response.json()
+
+    return data;
 }
 
 
@@ -84,23 +96,18 @@ function addTodo(todoText) {
 
 //displays categories
 let categoryHolder = document.getElementById('category')
-let categories = ["School","Home","Extra Work"]
 
 function displayCategories() {
-    
-    categories.forEach(element => {
 
+    categories.forEach(category => {
         let categoryOption = document.createElement('option')   //display categories as options from a drop down list
-        categoryOption.textContent = element
-    
-        categoryHolder.appendChild(categoryOption)
-    
-    }
+        categoryOption.textContent = category.innerText
+
+        categoryHolder.insertAdjacentHTML('beforeend', categoryOption)
+    })
         
-    )
-   
 }
-displayCategories(categories)
+
 
 
 
@@ -109,18 +116,7 @@ displayCategories(categories)
 
 //Lets user add new categories
 
-    // fetch('/categories', {
-    //     method: 'POST',
-    //     body: JSON.stringify({todoCategory: categoryHolder.value}),
-    //     headers: {
-    //         'Content-Type': 'application/json'
-    //     }
-    // })
-    // .then(res => res.json())
-    // .then(data =>  {
-    //     displayCategories(data)
-    // })
-
+    
 let form = document.getElementById('categoryForm')
 function addCategory() {
     form.classList.toggle('invisible')
@@ -140,6 +136,20 @@ submitCategory.addEventListener('click', () => {
 
     categoryHolder.appendChild(categoryOption)
 
+    fetch('/categories', {
+        method: 'POST',
+        body: JSON.stringify({category: categoryText}),
+        headers: {
+            'Content-Type': 'application/json'                      ////////shows the new categories populate on the /categories, but does not send the data back that is being held////////
+        }    
+    })
+    .then(res => res.json())
+    .then(data => console.log(data))
+    .then(data =>  {
+        displayCategories(data)
+    })
+
+    
 })
 
 
@@ -246,7 +256,7 @@ function deleteCompleted() {
 
 //         fetch('/todos', {
 //             method: 'DELETE',
-//             body: JSON.stringify({id: badTodo}),
+//             body: JSON.stringify({todoID: badTodo}),
 //             headers: {
 //                 'Content-Type': 'application/json'
 //             }
@@ -258,12 +268,9 @@ function deleteCompleted() {
 //         })
     
 // }
-//     findtoDoLeft()
+    findtoDoLeft()
 
 }
-
-
-
 
 
 
@@ -344,7 +351,16 @@ function editList() {
 }}
 
 
+
+
+
+
+
 getTodos().then( todos => {
     displayTodos(todos)
+})
+
+getCategories().then( categories => {
+    displayCategories(categories)
 })
 
