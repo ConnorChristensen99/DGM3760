@@ -165,17 +165,17 @@ let todos = [
     }
 ]
 
-let categories = []
+let categories = ["School", "Home", "Extra Work"]
 
 
 
 
 ///////ToDos////////
-app.get('/todos', (req, res) => {//If I see a get request here then I will run this function
+app.get('/todos', (req, res) => {//If I see a get request here then I will run this function   //DONE
     res.send(todos)
 })
 
-app.post('/todos', (req, res) => {//If I see a post request at this request then I will run this function
+app.post('/todos', (req, res) => {//If I see a post request at this request then I will run this function    //DONE
     const todo = req.body.todo
     const category = req.body.todoCategory
     todos.push( {
@@ -203,12 +203,11 @@ app.put('/todos', (req, res) => {
 
 
 
-app.delete('/todos', (req, res) => {
-    const todo = req.body.todoID
-    let tobeDeleted = todos.find(todo)
+app.delete('/todos', (req, res) => { //DONE
+    const badTodo = req.body.todoID 
 
-    todos.splice(tobeDeleted, 1)
-
+    todos.splice(badTodo, 1)  
+                                                                                    
     res.send(todos)
 
 })
@@ -218,13 +217,12 @@ app.delete('/todos', (req, res) => {
 
 
 ///////Categories////////
-app.get('/categories', (req, res) => {
+app.get('/categories', (req, res) => {//DONE
     res.send(categories)
 })
 
 
-app.post('/categories', (req, res) => {
-    console.log(req.body.category)
+app.post('/categories', (req, res) => {//DONE
     const newCategory = req.body.category
     categories.push(newCategory)
 
@@ -232,7 +230,7 @@ app.post('/categories', (req, res) => {
 
     res.send(categories)
 
-    console.log(categories)
+
 })
 
 
@@ -251,20 +249,20 @@ app.put('/categories', (req, res) => {
 
 
 
-app.delete('/categories', (req, res) => {
-    const category = req.body.id
-    let tobeDeleted = categories.find(category)
+app.delete('/categories', (req, res) => {//DONE
+    const badCategory = req.body.id
+    console.log(badCategory)
 
-    categories.splice(tobeDeleted, 1)
+
+    categories.splice(badCategory, 1)
 
     res.send(categories)
+    console.log(categories)
 })
+ 
 
 
 
-
-
-
-app.listen(port, () => {
+app.listen(port, () => {//DONE
     console.log("It's Go Time")
 })

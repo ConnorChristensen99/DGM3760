@@ -21,10 +21,10 @@ let todos = [
     }
 ]
 
-let categories = []
-
-
-
+let categories = [];
+ 
+ 
+ 
 async function getTodos() {
     let response = await fetch('/todos')
     let data = await response.json()
@@ -97,16 +97,20 @@ function addTodo(todoText) {
 //displays categories
 let categoryHolder = document.getElementById('category')
 
-function displayCategories() {
+function displayCategories(categories) {
 
     categories.forEach(category => {
         let categoryOption = document.createElement('option')   //display categories as options from a drop down list
-        categoryOption.textContent = category.innerText
 
-        categoryHolder.insertAdjacentHTML('beforeend', categoryOption)
+        categoryOption.innerText = category
+        console.log(categoryOption)
+
+        categoryHolder.appendChild(categoryOption) 
+
+        
     })
         
-}
+} 
 
 
 
@@ -115,12 +119,11 @@ function displayCategories() {
 
 
 //Lets user add new categories
-
-    
 let form = document.getElementById('categoryForm')
 function addCategory() {
     form.classList.toggle('invisible')
 }
+
 
 let submitCategory = document.getElementById('submitCategory')      //new form pops up to add a category
 let cname = document.getElementById('cname')
@@ -136,6 +139,8 @@ submitCategory.addEventListener('click', () => {
 
     categoryHolder.appendChild(categoryOption)
 
+    categoryHolder.innerHTML = ""
+
     fetch('/categories', {
         method: 'POST',
         body: JSON.stringify({category: categoryText}),
@@ -144,9 +149,8 @@ submitCategory.addEventListener('click', () => {
         }    
     })
     .then(res => res.json())
-    .then(data => console.log(data))
     .then(data =>  {
-        displayCategories(data)
+        displayCategories(categories)
     })
 
     
@@ -163,58 +167,70 @@ let form2 = document.getElementById('editcategoryForm')
 function editCategory() {
     let newCategoryList = []
     form2.innerHTML = ""
-    categoryHolder.innerText = ""
                                                 //initialize a new array and empty the holder to make sure it's empty
                                                 //insert current categories into now visible list to be edited
-
-    for (i=0;i<categories.length; i++) {
-        let todoCategories = `<span id='${i}'>${categories[i]}</span>`
-        form2.insertAdjacentHTML('beforeend', todoCategories)
-    }
-
+    getCategories().then(categories => {
+        categories.forEach(category => {
+            let categoryOption = document.createElement('li')   //display categories as options from a drop down list
+    
+            categoryOption.innerText = category
+    
+    
+            form2.appendChild(categoryOption) 
+    
+            
+        })
+    })
+    .then()
     form2.classList.toggle('invisible')
 
-
-    // fetch('/categories', {
-    //     method: 'DELETE',
-    //     body: JSON.stringify({id: target.id),
-    //     headers: {
-    //         'Content-Type': 'application/json'
-    //     }
-    // })
-    // .then(res => res.json())
-    // .then(data =>  {
-    //     displayCategories(data)
-    // })
-
-    form2.addEventListener('dblclick', function handleClick(event) { //on double click remove the category
+    form2.addEventListener('dblclick', function handleClick(event) { //on double click remove the category   
         let target = event.target
         targetID = target.id
-        
         target.remove()
-        categories.splice(targetID, 1)
+        console.log(targetID)
+
+        categoryHolder.innerHTML = ""
+       
+        fetch('/categories', {
+            method: 'DELETE',
+            body: JSON.stringify({id: targetID}),
+            headers: {
+                'Content-Type': 'application/json'
+            } 
+        })
+        .then(res => res.json())
+        .then(data =>  {
+            
+            displayCategories(categories)
+        })
     })
     
 
-    if(form2.contentEditable = "false") {
-        form2.contentEditable = true;                       //checks if we can edit the items
-        let button = document.createElement('button');
-        button.innerText = "Save Changes";
-        button.classList.add('saveButton')
-        form2.appendChild(button);
+    getCategories().then( categories => {
+        if(form2.contentEditable = "false") {
+            form2.contentEditable = true;                       //checks if we can edit the items
+            let button = document.createElement('button');
+            button.innerText = "Save Changes";
+            button.classList.add('saveButton')
+            form2.appendChild(button);
+    
+            button.addEventListener('click', (event) => {
+                form2.contentEditable = false;
+                button.remove()
+                
+            })
+    
+    }
+    
+    })
+    
+   
 
-        button.addEventListener('click', (event) => {
-            form2.contentEditable = false;
-            button.remove()
-            
-        })
-}
 
 
-
-
-
-let submitbutton = document.createElement('button')
+getCategories().then( categories => {
+    let submitbutton = document.createElement('button')
 submitbutton.innerText = 'Submit'                           
 form2.appendChild(submitbutton);
 
@@ -222,55 +238,68 @@ submitbutton.addEventListener('click', () => {
 form2.classList.toggle('invisible')
                                                                                     //on click we hide the edit form
                                                                                     //replace the categories array with the new array
-for (let i=0; i<categories.length; i++) {
-        let newCategoryq = document.getElementById(`${i}`).innerHTML
+for (let i=0; i<categories.length; i++) {    
+        let newCategoryq = document.getElementById(`${i}`).innerHTML 
         categories.splice(i, 1, newCategoryq)
     
 }
 
-
-displayCategories(categories)
-
-})
+window.location.reload()
 
 
-let formP = document.createElement('p')
+})})
+
+
+
+getCategories().then( categories => {
+    let formP = document.createElement('p')
 formP.textContent = "Double Click on a Category to remove it"
   
 form2.appendChild(formP)
-
+})
 }
 
 
+ 
 
-
-
+ 
 
 //Lets user click clear done button and remove objects
 function deleteCompleted() {
     const todos = document.getElementsByClassName("done"); //check if item contains class done and delete if it does
+    for (let i=0; i < todos.length; i++) {
+        let deletedArray =[]
+        let tobeDeleted = todos.item(i)
 
-//         for(i=0; i < todos.length; i++){
-//         let badTodo = todos[i].id
-//         console.log(badTodo)
+        deletedArray.push(tobeDeleted)
+        console.log(deletedArray)
 
-//         fetch('/todos', {
-//             method: 'DELETE',
-//             body: JSON.stringify({todoID: badTodo}),
-//             headers: {
-//                 'Content-Type': 'application/json'
-//             }
-//         })
-//         .then(res => res.json())
-//         .then(data =>  {
-            
-//             displayTodos(data)
-//         })
+        deletedArray.forEach(markedTodo => { 
+            let badTodo = todos.id
     
-// }
-    findtoDoLeft()
+            console.log(badTodo) 
+    
+            fetch('/todos', {
+                method: 'DELETE',
+                body: JSON.stringify({todoID: badTodo}),
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            .then(res => res.json())
+            .then(data =>  {
+                
+                displayTodos(data)
+            })
+    
+            findtoDoLeft()
+    })
+    }
+    
+    
+}       
 
-}
+
 
 
 

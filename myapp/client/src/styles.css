@@ -241,10 +241,13 @@ select {
   height: auto;
 }
 
-#editcategoryForm span{
+#editcategoryForm li{
   background-color: white;
   border: #3b3b3b solid 1px;
   margin: 5px;
+  text-decoration: none;
+  list-style: none;
+  padding: 5px;
 }
 
 #editcategoryForm p{
