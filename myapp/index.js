@@ -193,9 +193,7 @@ app.put('/todos', (req, res) => {
     const todo = req.body.id
     const todoText = req.body.todo
 
-    let tobeUpdated = todos.find(todo)
-
-    todos.splice(tobeUpdated, 1, todoText)
+    todos.splice(todo, 1, todoText)
 
     res.send(todos)
  
