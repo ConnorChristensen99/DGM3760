@@ -104,7 +104,6 @@ function displayCategories(categories) {
         let categoryOption = document.createElement('option')   //display categories as options from a drop down list
 
         categoryOption.innerText = category
-        console.log(categoryOption)
 
         categoryHolder.appendChild(categoryOption) 
 
@@ -141,12 +140,12 @@ submitCategory.addEventListener('click', () => {
     categoryHolder.appendChild(categoryOption)
 
     categoryHolder.innerHTML = ""
-
+    window.location.reload()
     fetch('/categories', {
         method: 'POST',
         body: JSON.stringify({category: categoryText}),
         headers: {
-            'Content-Type': 'application/json'                      ////////shows the new categories populate on the /categories, but does not send the data back that is being held////////
+            'Content-Type': 'application/json'                    
         }    
     })
     .then(res => res.json())
@@ -165,6 +164,7 @@ submitCategory.addEventListener('click', () => {
 let form2 = document.getElementById('editcategoryForm')
 
 
+
 function editCategory() {
     let newCategoryList = []
     form2.innerHTML = ""
@@ -178,7 +178,6 @@ function editCategory() {
     
     
             form2.appendChild(categoryOption) 
-    
             
         })
     })
@@ -189,7 +188,7 @@ function editCategory() {
         let target = event.target
         targetID = target.id
         target.remove()
-        console.log(targetID)
+
 
         categoryHolder.innerHTML = ""
        
@@ -219,6 +218,7 @@ function editCategory() {
             button.addEventListener('click', (event) => {
                 form2.contentEditable = false;
                 button.remove()
+            
                 
             })
     
@@ -237,15 +237,29 @@ form2.appendChild(submitbutton);
 
 submitbutton.addEventListener('click', () => {
 form2.classList.toggle('invisible')
-                                                                                    //on click we hide the edit form
-                                                                                    //replace the categories array with the new array
-for (let i=0; i<categories.length; i++) {    
-        let newCategoryq = document.getElementById(`${i}`).innerHTML 
-        categories.splice(i, 1, newCategoryq)
-    
-}
 
-window.location.reload()
+let newCategories = []
+
+for (let i=0; i < categoryHolder.length; i++) {
+    let updatedCategory = form2.getElementsByTagName('li').item(i).textContent
+    newCategories.push(updatedCategory)
+    
+    console.log(newCategories)
+
+}
+fetch('/categories', {
+    method: 'PUT',
+    body: JSON.stringify({newCategory: newCategories}),
+    headers: {
+        'Content-Type': 'application/json'
+    }
+})
+.then(res => res.json())
+.then(data => console.log(data)) ///////////ALMOST DONE, JUST NEED TO PULL THE DATA FROM THE ARRAY AND DISPLAY IT
+// .then(data =>  {
+//     displayCategories(data)
+// })
+// .catch(err => console.log(err))
 
 
 })})
@@ -343,6 +357,7 @@ listContainer.addEventListener('dblclick', function handleClick(event) {
 //Lets User edit todo
 
 function editList() {
+    
 
     if(listContainer.contentEditable = "false") {  //checks if the container is editable
         listContainer.contentEditable = true;
@@ -358,36 +373,34 @@ function editList() {
             listContainer.contentEditable = false;
             button.remove()
 
-            // for (let i=0; i < todos.length; i++) {
+            for (let i=0; i < todos.length; i++) {
+                let updatedToDoID = todos[i].todoID
+                let updatedTodo = todos[i].todoText
                 
-            //     todos[i].todoText = listContainer.getElementsByTagName('li').item(i).innerText           ///////THIS SHOULD DO WHAT YOU WANT IT TO
+                updatedTodo = listContainer.getElementsByTagName('li').item(i).innerText    
 
-                
-            // }
+     
+                fetch('/todos', {
+                    method: 'PUT',
+                    body: JSON.stringify({todo: updatedTodo, id: updatedToDoID}),
+                    headers: {
+                        'Content-Type': 'application/json'
+                    }
+                })
+             
+                .then(res => res.json())
+                .then(data => console.log(data))
+                // .then(data =>  {
+                //     displayTodos(data)
+                // })
+                // .catch(err => console.log(err))
+            }
+
                 
                 findtoDoLeft()
 
-                
-            
-
-            
-
-//     //     fetch('/todos', {
-//     //     method: 'PUT',
-//     //     body: JSON.stringify({todo: todoText, id: todoID}),
-//     //     headers: {
-//     //         'Content-Type': 'application/json'
-//     //     }
-//     // })
-
-//     // .then(res => res.json())
-//     // .then(data =>  {
-//     //     displayTodos(data)
-//     // })
-
         })
-}
-}
+}}
 
 
 

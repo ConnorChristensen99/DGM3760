@@ -65,7 +65,6 @@ const Todo = new Schema({
     category: String
 })
 
-console.log(Todo)
 
 
 
@@ -193,14 +192,27 @@ app.post('/todos', (req, res) => {//If I see a post request at this request then
 
 })
 
-app.put('/todos', (req, res) => {
-    const todo = req.body.id
-    const todoText = req.body.todo
+app.put('/todos', (req, res) => { //DONE
+    const updatedID = req.body.id
+    const updatedtodoText = req.body.todo
 
-    todos.splice(todo, 1, todoText)
+    for (let i = 0; i < todos.length; i++) {
+     
+        const elem = todos[i];
 
+        if(elem.todoID == updatedID) {
+            elem.todoText = updatedtodoText
+
+            console.log(todos)
+        }
+        
+        
+    }
+ 
     res.send(todos)
  
+    
+    
 })
 
 
@@ -237,16 +249,19 @@ app.post('/categories', (req, res) => {//DONE
 
 
 app.put('/categories', (req, res) => {
-    const category = req.body.id
-    const categoryText = req.body.category
+    const updatedCategories = req.body.newCategory
+    let newCategories = []
 
-    let tobeUpdated = categories.find(category)
+    console.log(updatedCategories)
 
-    categories.splice(tobeUpdated, 1, categoryText)
+    newCategories.push(updatedCategories)
 
+    console.log(newCategories)
 
-    res.send(categories)
+    res.send(newCategories)
  
+    
+    
 })
 
 
