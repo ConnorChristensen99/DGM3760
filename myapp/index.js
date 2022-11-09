@@ -10,64 +10,68 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 })); 
 
 const cors = require('cors')
-
-
 app.use(cors({
  origin: '*'
 }))
 
+require('dotenv').config();
+const mongoose = require('mongoose');
 
-// const { MongoClient, ServerApiVersion } = require('mongodb');
-// const uri = "process.env.MONGO_URI";
+
+
+
+
+
+const { MongoClient, ServerApiVersion } = require('mongodb');
+const uri = process.env.MONGO_URI;
 // const client = new MongoClient(uri, { useNewUrlParser: true, useUnifiedTopology: true, serverApi: ServerApiVersion.v1 });
 // client.connect(err => {
 //   const collection = client.db("test").collection("devices");
 //   // perform actions on the collection object
+//   console.log("Connected to Mongo")
 //   client.close();
 // });
 
 
-// const mongoose = require('mongoose');
-
-
-// const uri = process.env.MONGO_URI;
-
-
-// mongoose.connect(
-//     uri,
-//     {
-//         useNewUrlParser: true
-//     }
-// )
-// .then(e => console.log('MongoDB Ready!'))
-// .catch(console.error)
+mongoose.connect(
+    uri,
+    {
+        useNewUrlParser: true
+    }
+)
+.then(e => console.log('MongoDB Ready!'))
+.catch(console.error)
 
 
 
 
 
 
-// const {model, Schema} = require('mongoose')
+
+
+const {model, Schema} = require('mongoose')
+
+
+
 
 // ////Todos Schema
-// const Todo = new Schema({
-//     id: Number,
-//     name: String,
-//     status: {
-//         type: Boolean,
-//         default: false
-//     },
-//     category: String
-// })
+const Todo = new Schema({
+    id: Number,
+    name: String,
+    status: {
+        type: Boolean,
+        default: false
+    },
+    category: String
+})
 
-
-
+console.log(Todo)
 
 
 
 // ////Add New Todo
 
-// const newTodo = new Todo({
+// const newTodo = new Todo ({
 //     id: 0,
 //     name: "Dishes",
 //     status: false,
@@ -98,7 +102,7 @@ app.use(cors({
 //      console.log(todos)
 // }
 
-// findUserByName("Dishes")
+// findTodoByName("Dishes")
 
 
 

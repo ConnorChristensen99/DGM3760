@@ -42,10 +42,10 @@ async function getCategories() {
 
 
 
-let listContainer = document.getElementById("todoList");
+let listContainer = document.getElementById("todoList")
 let addBtn = document.querySelector('#addBtn')
 let todoInput = document.querySelector('#inputText')
-
+// let editBtn = document.querySelectorAll('#editTodo')
 
 
 
@@ -55,7 +55,8 @@ function displayTodos(todos) {
 
     todos.forEach(todo => {
         let done = todo.todoComplete ? "done" : "";
-        let todoMarkup = `<div id="${todo.todoID}"><span id="categoryTitle">${todo.todoCategory}</span> <li id = '${todo.todoID}'>${todo.todoText}</li></div>`
+        let todoMarkup = `<div id="${todo.todoID}"><span id="categoryTitle">${todo.todoCategory}</span><li id = ${todo.todoID}>${todo.todoText} </li></div>` 
+        // <a id="editTodo" href="#">Edit</a>
 
         listContainer.insertAdjacentHTML('beforeend', todoMarkup)
     })
@@ -339,15 +340,9 @@ listContainer.addEventListener('dblclick', function handleClick(event) {
 
 
 
-
-
-
-
 //Lets User edit todo
 
 function editList() {
-
-
 
     if(listContainer.contentEditable = "false") {  //checks if the container is editable
         listContainer.contentEditable = true;
@@ -355,6 +350,7 @@ function editList() {
         button.innerText = "Save Changes";
         button.classList.add('saveButton')
         listContainer.appendChild(button);
+        listContainer.focus()
 
 
 
@@ -362,50 +358,36 @@ function editList() {
             listContainer.contentEditable = false;
             button.remove()
 
-
-
             // for (let i=0; i < todos.length; i++) {
-            //     let newToBeChanged = listContainer.innerText
-            //     console.log(newToBeChanged)
+                
+            //     todos[i].todoText = listContainer.getElementsByTagName('li').item(i).innerText           ///////THIS SHOULD DO WHAT YOU WANT IT TO
 
-            //     listContainer.innerText = newToBeChanged              ////Trying to make the DOM update with the innerText given after editing it. The goal is to then push all todos and fetch them all updating every single one
+                
             // }
+                
+                findtoDoLeft()
 
-
-
-
-            // function displayTodos(todos) {
-            //     listContainer.innerHTML = ""
+                
             
-            //     todos.forEach(todo => {
-            //         let done = todo.todoComplete ? "done" : "";
-            //         let todoMarkup = `<div id="${todo.todoID}"><span id="categoryTitle">${todo.todoCategory}</span> <li id = '${todo.todoID}'>${listContainer.innerText}</li></div>`         ////Havent tried this yet, but we are calling display
-                                                                                                                                                                                                ////todos to recall with the changed value
-            
-            //         listContainer.insertAdjacentHTML('beforeend', todoMarkup)
-            //     })
-            //     findtoDoLeft()
-            // }
-            
-        
 
             
 
-    //     fetch('/todos', {
-    //     method: 'PUT',
-    //     body: JSON.stringify({todo: todoText, id: todoID}),
-    //     headers: {
-    //         'Content-Type': 'application/json'
-    //     }
-    // })
+//     //     fetch('/todos', {
+//     //     method: 'PUT',
+//     //     body: JSON.stringify({todo: todoText, id: todoID}),
+//     //     headers: {
+//     //         'Content-Type': 'application/json'
+//     //     }
+//     // })
 
-    // .then(res => res.json())
-    // .then(data =>  {
-    //     displayTodos(data)
-    // })
+//     // .then(res => res.json())
+//     // .then(data =>  {
+//     //     displayTodos(data)
+//     // })
 
         })
-}}
+}
+}
 
 
 

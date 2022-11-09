@@ -262,3 +262,20 @@ span {
   padding: 5px;
 }
 
+#editTodo {
+  text-decoration: none;
+  list-style-type: none;
+  background-color: #777;
+  padding: 1%;
+  border-radius: 5px;
+  align-items: flex-end;
+  margin-left: 100px;
+}
+
+#editTodo:visited {
+  color: white;
+}
+
+#editTodo:hover {
+  background-color: black;
+}
