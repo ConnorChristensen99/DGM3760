@@ -55,7 +55,7 @@ const {model, Schema} = require('mongoose')
 
 
 // ////Todos Schema
-const Todo = new Schema({
+const todoSchema = new Schema({
     id: Number,
     name: String,
     status: {
@@ -65,12 +65,12 @@ const Todo = new Schema({
     category: String
 })
 
-
+const Todo = model("todo", todoSchema)
 
 
 // ////Add New Todo
 
-// const newTodo = new Todo ({
+// const newTodo = new Todo({
 //     id: 0,
 //     name: "Dishes",
 //     status: false,
@@ -250,11 +250,10 @@ app.post('/categories', (req, res) => {//DONE
 
 app.put('/categories', (req, res) => {
     const updatedCategories = req.body.newCategory
-    let newCategories = []
 
-    console.log(updatedCategories)
 
-    newCategories.push(updatedCategories)
+    categories.splice(categories, categories.length, updatedCategories)
+    let newCategories = categories.flat(1)
 
     console.log(newCategories)
 

@@ -99,14 +99,18 @@ function addTodo(todoText) {
 let categoryHolder = document.getElementById('category')
 
 function displayCategories(categories) {
-
+    categoryHolder.innerText = ""
+    categories = categories.flat(1)
     categories.forEach(category => {
+
+        
+        
         let categoryOption = document.createElement('option')   //display categories as options from a drop down list
 
         categoryOption.innerText = category
-
+        
         categoryHolder.appendChild(categoryOption) 
-
+        
         
     })
         
@@ -166,14 +170,16 @@ let form2 = document.getElementById('editcategoryForm')
 
 
 function editCategory() {
-    let newCategoryList = []
+
     form2.innerHTML = ""
                                                 //initialize a new array and empty the holder to make sure it's empty
-                                                //insert current categories into now visible list to be edited
+                                           //insert current categories into now visible list to be edited
     getCategories().then(categories => {
+        categories = categories.flat(1)
         categories.forEach(category => {
+             
             let categoryOption = document.createElement('li')   //display categories as options from a drop down list
-    
+            
             categoryOption.innerText = category
     
     
@@ -211,7 +217,7 @@ function editCategory() {
         if(form2.contentEditable = "false") {
             form2.contentEditable = true;                       //checks if we can edit the items
             let button = document.createElement('button');
-            button.innerText = "Save Changes";
+            button.innerText = "Save Changes"; 
             button.classList.add('saveButton')
             form2.appendChild(button);
     
@@ -243,8 +249,6 @@ let newCategories = []
 for (let i=0; i < categoryHolder.length; i++) {
     let updatedCategory = form2.getElementsByTagName('li').item(i).textContent
     newCategories.push(updatedCategory)
-    
-    console.log(newCategories)
 
 }
 fetch('/categories', {
@@ -255,14 +259,15 @@ fetch('/categories', {
     }
 })
 .then(res => res.json())
-.then(data => console.log(data)) ///////////ALMOST DONE, JUST NEED TO PULL THE DATA FROM THE ARRAY AND DISPLAY IT
-// .then(data =>  {
-//     displayCategories(data)
-// })
-// .catch(err => console.log(err))
+.then(data => console.log(newCategories)) 
+.then(data =>  {
+    displayCategories(newCategories)
+})
+.catch(err => console.log(err))
 
-
+window.location.reload()
 })})
+
 
 
 
