@@ -290,19 +290,19 @@ function deleteCompleted() {
     for (let i=0; i < todos.length; i++) {
         let deletedArray =[]
         let tobeDeleted = todos.item(i)
-
-        deletedArray.push(tobeDeleted)
-        console.log(deletedArray)
+    
+        deletedArray.push(tobeDeleted.id)
+        
 
         deletedArray.forEach(markedTodo => { 
-            let badTodo = todos.id
+            let badTodo = markedTodo
     
-            console.log(badTodo) 
-    
+            
+     
             fetch('/todos', {
                 method: 'DELETE',
-                body: JSON.stringify({todoID: badTodo}),
-                headers: {
+                body: JSON.stringify({todoID: badTodo}), 
+                headers: { 
                     'Content-Type': 'application/json'
                 }
             })

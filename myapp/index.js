@@ -68,83 +68,12 @@ const todoSchema = new Schema({
 const Todo = model("todo", todoSchema)
 
 
-// ////Add New Todo
+//Category Schema
+const categorySchema = new Schema ({
+    name: String
+})
 
-// const newTodo = new Todo({
-//     id: 0,
-//     name: "Dishes",
-//     status: false,
-//     category: "School",
-// })
-
-// newTodo.save().then(doc => {
-//     console.log("New Todo Saved")
-// })
-
-
-
-
-
-
-// ////Pulls from the database to give Todos
-
-// const findallTodos = async() => {
-//     const allTodos = await Todo.find()
-//     console.log(allTodos)
-// }
-
-// findallTodos()
-
-// const findTodoByName = async(name) => {
-//     const todos = await Todo.find({name})
-
-//      console.log(todos)
-// }
-
-// findTodoByName("Dishes")
-
-
-
-
-
-
-// ////Updates the Database
-
-// const editName = async(name) => {
-//     const todo = await Todo.findOne({name})
-
-//     if(!todo) {
-//         throw new Error('Todo not Found!')
-//     }
-
-//     todo.name = Updated
-
-//     const result = await todo.save()
-
-//     console.log(result)
-// }
-
-
-
-
-
-// ////Deletes Items in  the database
-
-// const deleteTodo = async(name) => {
-//     await Todo.deleteOne({name})      //won't run unless in database
-
-//     const allTodos = Todo.find()
-
-//     console.log(allTodos)
-// }
-
-
-
-
-
-
-
-
+const Category = model('category', categorySchema)
 
 
 let todos = [
@@ -173,10 +102,17 @@ let categories = ["School", "Home", "Extra Work"]
 
 
 
+
+
+
 ///////ToDos////////
 app.get('/todos', (req, res) => {//If I see a get request here then I will run this function   //DONE
     res.send(todos)
 })
+
+
+
+
 
 app.post('/todos', (req, res) => {//If I see a post request at this request then I will run this function    //DONE
     const todo = req.body.todo
@@ -190,7 +126,25 @@ app.post('/todos', (req, res) => {//If I see a post request at this request then
 
     res.send(todos)
 
+
+    ////Add New Todo IN DATABASE
+
+const newTodo = new Todo({
+    id: todos.length,
+    name: todo,
+    status: false,
+    category: category,
 })
+
+newTodo.save().then(doc => {
+    console.log("New Todo Saved")
+})
+
+})
+
+
+
+
 
 app.put('/todos', (req, res) => { //DONE
     const updatedID = req.body.id
@@ -210,6 +164,23 @@ app.put('/todos', (req, res) => { //DONE
     }
  
     res.send(todos)
+
+    // ////Updates the Database
+
+const editTodo = async(updatedID) => {
+    const todo = await Todo.findOne({updatedID})
+
+    if(!todo) {
+        throw new Error('Todo not Found!')
+    }
+
+    todo.todoText = updatedtodoText
+
+    const result = await todo.save()
+
+    console.log(result)
+}
+
  
     
     
@@ -217,13 +188,22 @@ app.put('/todos', (req, res) => { //DONE
 
 
 
-app.delete('/todos', (req, res) => { //DONE
-    const badTodo = req.body.todoID 
 
+
+app.delete('/todos', (req, res) => { //DONE 
+    const badTodo = req.body.todoID 
+    console.log(badTodo)
     todos.splice(badTodo, 1)  
                                                                                     
-    res.send(todos)
+    res.send(todos) 
 
+
+    ////Deletes Items in  the database
+const deleteTodo = async(badTodo) => {
+    await Todo.deleteOne({badTodo})    
+}   
+
+ 
 })
 
 
@@ -235,17 +215,31 @@ app.get('/categories', (req, res) => {//DONE
     res.send(categories)
 })
 
+ 
+
 
 app.post('/categories', (req, res) => {//DONE
-    const newCategory = req.body.category
-    categories.push(newCategory)
+    const category = req.body.category
+    categories.push(category)
 
     
 
     res.send(categories)
 
 
+
+    const newCategory = new Category({
+        name: category
+    })
+    
+    newCategory.save().then(doc => {
+        console.log("New Category Saved")
+    })
+
+
 })
+
+
 
 
 app.put('/categories', (req, res) => {
@@ -265,17 +259,24 @@ app.put('/categories', (req, res) => {
 
 
 
+
+
+
 app.delete('/categories', (req, res) => {//DONE
     const badCategory = req.body.id
-    console.log(badCategory)
-
-
     categories.splice(badCategory, 1)
 
     res.send(categories)
-    console.log(categories)
+    
+    
+    const deleteCategory = async(badCategory) => {
+        await Category.deleteOne({badCategory})
+    }  
+    deleteCategory()
 })
  
+
+
 
 
 
