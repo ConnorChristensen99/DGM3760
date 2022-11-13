@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 
 
     <title>Book Tracker</title>
@@ -26,12 +27,38 @@
             </ul>
         </nav>
 
-        <input class="reviewSearch" type="text" placeholder="Search..">
+        <!-- <input class="reviewSearch" type="text" placeholder="Search.."> -->
+
+
+
+        <div id="search-form"  class="invisible">
+           
+            <div id="search-title"><h4>Add a Review:</h4><a id="x" href="#">X</a></div>
+            <input class="searchForm" type="text" placeholder="Search for a book.."> 
+            <textarea placeholder="Write Review..."></textarea>
+            
+    
+            <div class="rating" id="rating">
+                <span id ="1" class="fa fa-star fa-2x"></span>
+                <span id ="2" class="fa fa-star fa-2x"></span>
+                <span id ="3" class="fa fa-star fa-2x"></span>
+                <span id ="4" class="fa fa-star fa-2x"></span>
+                <span id ="5" class="fa fa-star fa-2x"></span>
+          </div>
+
+
+            <div class="text-box">
+                <a id="addBook" href="#" class="btn btn-white btn-animate">Add Review</a>
+            </div>
+    
+           </div>
+
+
 
 
         <div id="addReview">
             <h2>Your Reviews</h2>
-            <a href="#"><i class="fas fa-plus-circle fa-3x"></i></a>
+            <button id="add-review-btn"><i class="fas fa-plus-circle fa-4x"></i></button>
             </div>
 
             <div class="reviewCards">
@@ -52,11 +79,11 @@
     
     
                 <div class="rating">
-                    <i class="rating__star far fa-star fa-2x"></i>
-                    <i class="rating__star far fa-star fa-2x"></i>
-                    <i class="rating__star far fa-star fa-2x"></i>
-                    <i class="rating__star far fa-star fa-2x"></i>
-                    <i class="rating__star far fa-star fa-2x"></i>
+                    <span class="fa fa-star fa-2x checked"></span>
+                    <span class="fa fa-star fa-2x checked"></span>
+                    <span class="fa fa-star fa-2x checked"></span>
+                    <span class="fa fa-star fa-2x"></span>
+                    <span class="fa fa-star fa-2x"></span>
               </div>
 
             </div>
@@ -74,6 +101,6 @@
     
 </body>
 
-<script type="text/javascript" src="main.js"></script>
+<script type="text/javascript" src="reviews.js"></script>
 
 </html>

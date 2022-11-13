@@ -133,7 +133,7 @@
 .invisible {
   display: none;
 }
-  #search-form {
+  #search-form, #review-form {
     padding: 10px;
     width: 750px;
     height: 300px;
@@ -149,6 +149,13 @@
   font-size: 17px;
   }
 
+  textarea {
+    width: 80%;
+  }
+
+  .checked {
+    color: orange;
+  }
 
 #search-title {
   display: flex;
@@ -163,7 +170,7 @@
   font-weight: 500;
 }
 
-#add-book-btn{
+#add-book-btn, #add-review-btn{
   border: none;
   background-color: transparent;
 }
