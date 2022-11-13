@@ -14,8 +14,6 @@
   }
 
 
-
-
 /* BODY STYLING */
   body {
     height: 100vh;
@@ -57,7 +55,7 @@
   }
   
   li a {
-    display: block;
+    display: block; 
     color: var(--main-white);
     text-align: center;
     padding: 14px 16px;
@@ -73,13 +71,12 @@
   }
 
 
-  input[type=text] {
+  .reviewSearch {
   width: 100%;
   padding: 6px;
   margin: 8px 0 20px 0;
   margin-right: 16px;
   font-size: 17px;
-
   }
 
 
@@ -92,16 +89,15 @@
     padding-bottom: 5%;
 }
 
-#addInterested a:visited {
-    color: var(--main-yellow)
-}
-
   /* Interested Book Cards */
 
   .newInterested {
     padding: 0% 0% 5% 0%;
     display: flex;
   }
+.fa-plus-circle {
+  color: rgb(221, 221, 88);
+}
 
   .newInterestedInfo {
     display: flex;
@@ -128,9 +124,100 @@
   .interestedIcon {
     display: flex;
     flex-direction: column;
+
   }
 
 
+/* Search Form Styling */
+
+.invisible {
+  display: none;
+}
+  #search-form {
+    padding: 10px;
+    width: 750px;
+    height: 300px;
+    background-color: rgb(12, 151, 243);
+    position: absolute;
+  }
+
+  .searchForm {
+  width: 100%;
+  padding: 6px;
+  margin: 8px 0 20px 0;
+  margin-right: 16px;
+  font-size: 17px;
+  }
+
+
+#search-title {
+  display: flex;
+  justify-content: space-between;
+}
+
+#x {
+  text-decoration: none;
+  color: #111;
+  display: block;
+  font-size: larger;
+  font-weight: 500;
+}
+
+#add-book-btn{
+  border: none;
+  background-color: transparent;
+}
+
+#add-book-btn:hover {
+  cursor:pointer;
+}
+
+
+/* BTN STYLING */
+.text-box {
+ margin-left: 10px;
+ margin-top: 10px;
+}
+
+.btn:link,
+.btn:visited {
+  text-transform: uppercase;
+  text-decoration: none;
+  padding: 15px 40px;
+  display: inline-block;
+  border-radius: 100px;
+  transition: all .2s;
+  position: absolute;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.btn:active {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn-white {
+  background-color: #fff;
+  color: #777;
+}
+
+.btn::after {
+  content: "";
+  display: inline-block;
+  height: 100%;
+  width: 100%;
+  border-radius: 100px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  transition: all .4s;
+}
+  
 
   /* Review Page Styling */
   #addReview {
