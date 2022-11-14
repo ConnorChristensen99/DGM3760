@@ -21,6 +21,11 @@
     background: var(--main-purp);
   }
 
+  #interestedCards {
+    border: 1px solid black;
+    padding: 2%;
+  }
+
   .wrapper {
     margin: 120px auto;
     max-width: 800px;
@@ -225,7 +230,9 @@
   transition: all .4s;
 }
   
-
+p {
+  padding: 2%;
+}
   /* Review Page Styling */
   #addReview {
     display: flex;
@@ -264,7 +271,8 @@
     display: flex;
     width: 180px;
  }
- 
+
+
  .rating__star {
     cursor: pointer;
     color: #dabd18b2;
