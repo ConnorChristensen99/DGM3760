@@ -25,28 +25,50 @@ let stars = starRating.getElementsByTagName('span')
 let reviewText = document.getElementById('reviewText')
 
 
+
+//Displays the Stars
+function displayStars(rating) {         
+let newStars = []
+    
+    for (let i=0; i < rating; i++) {
+
+        if (i < rating) {
+             star = `<span class="fa fa-star fa-2x checked"></span>`
+        }if( i > rating) {                                                      //Problem is this stops at whatever rating you give it, in other words doesnt hit the other if
+             star = `<span class="fa fa-star fa-2x"></span>`
+        }
+
+        
+         newStars.push(star)
+
+     }   
+     
+
+        return newnewStars
+}
+
+
+
 //Displays the reviews
 function displayReviews(reviews) {
+    
     bodyCards.innerHTML = ""
 
     reviews.forEach(review => {
         let reviewMarkup = `<div class="newReview"><img src=${review.image} class="reviewImage" alt="Image of the Book"> 
         <div class="newReviewInfo"> <div id="stars-bottom"><h4>${review.title}</h4> <br>
-        <p>${review.review}</p></div>
-        <div class="rating">
-            <span class="fa fa-star fa-2x checked"></span>
-            <span class="fa fa-star fa-2x checked"></span>
-            <span class="fa fa-star fa-2x checked"></span>
-            <span class="fa fa-star fa-2x checked"></span>
-            <span class="fa fa-star fa-2x "></span>
-                </div>
-                </div>
-            </div>`
+        <p>${review.review}</p></div>`
 
-
-
+            
+            
             bodyCards.insertAdjacentHTML('beforeend', reviewMarkup)
+
+            bodyCards.insertAdjacentHTML('beforeend', displayStars(review.rating))
+            
     })
+
+    
+
 
 }
 
@@ -78,6 +100,7 @@ for (let i=0; i<stars.length; i++) {
 
 //Displays the Add A Review Form
 addBtn.addEventListener('click', event => {
+
     searchForm.classList.remove('invisible')
 })
 
