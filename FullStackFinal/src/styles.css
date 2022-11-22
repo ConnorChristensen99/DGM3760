@@ -22,7 +22,6 @@
   }
 
   #interestedCards {
-    border: 1px solid black;
     padding: 2%;
   }
 
@@ -97,8 +96,10 @@
   /* Interested Book Cards */
 
   .newInterested {
-    padding: 0% 0% 5% 0%;
+    padding: 2% 0% 5% 0%;
     display: flex;
+    border: 1px solid black;
+    margin-bottom: 30px;
   }
 .fa-plus-circle {
   color: rgb(221, 221, 88);
@@ -141,12 +142,12 @@
   #search-form, #review-form {
     padding: 10px;
     width: 750px;
-    height: 300px;
+    height: 400px;
     background-color: rgb(12, 151, 243);
     position: absolute;
   }
 
-  .searchForm {
+  .searchForm, .reviewForm {
   width: 100%;
   padding: 6px;
   margin: 8px 0 20px 0;
@@ -162,12 +163,21 @@
     color: orange;
   }
 
-#search-title {
+#search-title, #review-title {
   display: flex;
   justify-content: space-between;
 }
 
-#x {
+#newReviewText {
+  width: 100%;
+  height: 20%;
+}
+
+#deleteBtn {
+  width: 80px;
+}
+
+#x, #back {
   text-decoration: none;
   color: #111;
   display: block;
@@ -229,6 +239,14 @@
   z-index: -1;
   transition: all .4s;
 }
+
+.editBtn {
+  width: 50px;
+  height: auto;
+  float: right;
+  margin-right: 20px;
+  padding: 2%;
+}
   
 p {
   padding: 2%;
@@ -247,10 +265,10 @@ p {
 
 
   .newReview {
-    margin-bottom: 5px;
     padding: 2% 0% 5% 0%;
     display: flex;
     border: #111 1px solid;
+    margin-bottom: -40px
   }
 
   .newReviewInfo {

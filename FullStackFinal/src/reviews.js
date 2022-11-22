@@ -13,9 +13,13 @@ let reviews = [
 
 let searchForm = document.getElementById('search-form')
 let addBtn = document.getElementById('add-review-btn')
+let reviewForm = document.getElementById('review-form')
+let placeHolder = document.getElementById('reviewFormPlaceholder')
+
 
 let removeBtn = document.getElementById('x')
 let addReviewBtn = document.getElementById('addBook')
+let backBtn = document.getElementById('back')
 
 let bodyCards = document.getElementById('reviewCards')
 
@@ -23,6 +27,10 @@ let starRating = document.getElementById('rating')
 let stars = starRating.getElementsByTagName('span')
 
 let reviewText = document.getElementById('reviewText')
+let newReviewText = document.getElementById('newReviewText')
+
+let editBtn = document.getElementById('editBtn')
+let addReview = document.getElementById('addReview')
 
 
 
@@ -37,16 +45,40 @@ let newStars = []
         }if( i > rating) {                                                      //Problem is this stops at whatever rating you give it, in other words doesnt hit the other if
              star = `<span class="fa fa-star fa-2x"></span>`
         }
-
-        
          newStars.push(star)
-
      }   
-     
 
-        return newnewStars
+        return newStars.join("")
+
 }
 
+
+
+//Display the selected Review for edit    
+function editReview(id) {
+    reviewForm.classList.remove('invisible')
+
+
+    let thisReview = reviews.find(review => id == review.reviewID)
+
+    placeHolder.placeholder = thisReview.title
+    newReviewText.innerText = thisReview.review
+
+    
+}
+
+addReview.addEventListener('click', event => {
+    reviewForm.classList.add('invisible')
+})
+
+//Removes the Review
+function removeReview(id) {
+    reviews.splice(id, 1)
+
+
+
+    displayReviews(reviews)
+}
 
 
 //Displays the reviews
@@ -57,7 +89,8 @@ function displayReviews(reviews) {
     reviews.forEach(review => {
         let reviewMarkup = `<div class="newReview"><img src=${review.image} class="reviewImage" alt="Image of the Book"> 
         <div class="newReviewInfo"> <div id="stars-bottom"><h4>${review.title}</h4> <br>
-        <p>${review.review}</p></div>`
+       <p>${review.review}</p><button id="editBtn" onclick="editReview(${review.reviewID})" class="editBtn btn btn-white btn-animate" type="button">Edit</button> <button id="deleteBtn" onclick="removeReview(${review.reviewID})" class="editBtn btn btn-white btn-animate" type="button">Delete</button></div>`
+        
 
             
             
@@ -108,6 +141,10 @@ addBtn.addEventListener('click', event => {
 //Removes the Add A Review Form
 removeBtn.addEventListener('click', event => {
     searchForm.classList.add('invisible')
+})
+//Removes the Add A Review Form
+backBtn.addEventListener('click', event => {
+    reviewForm.classList.add('invisible')
 })
 
 //Adds a Review and removes the form  

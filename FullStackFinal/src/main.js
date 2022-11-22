@@ -20,6 +20,8 @@ let addBookBtn = document.getElementById('addBook')
 let bodyCards = document.getElementById('interestedCards')
 
 
+
+
 //Displays the books
 function displayBooks(interestedBooks) {
     bodyCards.innerHTML = ""
@@ -29,21 +31,29 @@ function displayBooks(interestedBooks) {
         <div class="newInterestedInfo"> <h4>${book.title}</h4> <br>
         <p>${book.description}</p></div> 
         <div class="interestedIcon">
-                <a href="#"><i class="fas fa-heart fa-2x"></i></a>
-                 <a href="#"><i class="fas fa-shopping-cart fa-2x"></i></a>
-                </div>
+                <button id="deleteBtn" onclick="removeBook(${book.bookID})" class="editBtn btn btn-white btn-animate" type="button">Delete</button>
                 
             </div>`
-
 
             bodyCards.insertAdjacentHTML('beforeend', bookMarkup)
     })
 
+    
 }
 
 displayBooks(interestedBooks)
 
 
+// //Removes item from the page when clicked
+function removeBook(id) {
+    console.log(interestedBooks)
+
+    interestedBooks.splice(id, 1)
+
+
+
+    displayBooks(interestedBooks)
+}
 
 
 //Displays the Add A Book Form
@@ -70,3 +80,6 @@ addBookBtn.addEventListener('click', event => {
 
     displayBooks(interestedBooks)
 })
+
+
+
