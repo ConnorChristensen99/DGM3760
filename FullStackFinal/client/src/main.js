@@ -1,4 +1,3 @@
-
 //Interested Books JS
 let interestedBooks = [
     {
@@ -24,6 +23,8 @@ let removeBtn = document.getElementById('x')
 let addBookBtn = document.getElementById('addBook')
 
 let bodyCards = document.getElementById('interestedCards')
+
+let searchBook = document.getElementById("searchForm")
 
 
 
@@ -77,17 +78,18 @@ removeBtn.addEventListener('click', event => {
 addBookBtn.addEventListener('click', event => {
     searchForm.classList.add('invisible')
 
-    // fetch('/books', {
-    //     method: 'POST',
-    //     body: JSON.stringify({todo: "Hi"}),
-    //     headers: {
-    //         'Content-Type': 'application/json'       ''This Console Logs Hi in the server so it is connected
-    //     }
-    // })
-    // .then(res => res.json())
-    // .then(data =>  {
-    //     displayBooks(data)
-    // })
+    console.log(searchBook.value)
+    fetch('/books', {
+        method: 'POST',
+        body: JSON.stringify({bookTitle: searchBook.value}),
+        headers: {
+            'Content-Type': 'application/json' 
+        }
+    })
+    .then(res => res.json())
+    .then(data =>  {
+        console.log(data)
+    })
 
     // interestedBooks.push({
     //     bookID: interestedBooks.length,
@@ -103,5 +105,7 @@ addBookBtn.addEventListener('click', event => {
 getBooks().then( books => {
     displayBooks(books)
 })
+
+
 
 
