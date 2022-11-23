@@ -11,6 +11,12 @@ let reviews = [
 ]
 
 
+
+
+
+
+
+
 let searchForm = document.getElementById('search-form')
 let addBtn = document.getElementById('add-review-btn')
 let reviewForm = document.getElementById('review-form')
@@ -24,13 +30,22 @@ let backBtn = document.getElementById('back')
 let bodyCards = document.getElementById('reviewCards')
 
 let starRating = document.getElementById('rating')
+let editedStarRating = document.getElementById('editRating')
 let stars = starRating.getElementsByTagName('span')
+let newSStars = editedStarRating.getElementsByTagName('span')
 
 let reviewText = document.getElementById('reviewText')
 let newReviewText = document.getElementById('newReviewText')
 
+
 let editBtn = document.getElementById('editBtn')
 let addReview = document.getElementById('addReview')
+
+
+
+
+
+
 
 
 
@@ -42,7 +57,7 @@ let newStars = []
 
         if (i < rating) {
              star = `<span class="fa fa-star fa-2x checked"></span>`
-        }if( i > rating) {                                                      //Problem is this stops at whatever rating you give it, in other words doesnt hit the other if
+        }if( i > rating) {                                                      
              star = `<span class="fa fa-star fa-2x"></span>`
         }
          newStars.push(star)
@@ -54,6 +69,9 @@ let newStars = []
 
 
 
+
+
+
 //Display the selected Review for edit    
 function editReview(id) {
     reviewForm.classList.remove('invisible')
@@ -61,24 +79,53 @@ function editReview(id) {
 
     let thisReview = reviews.find(review => id == review.reviewID)
 
+
+
     placeHolder.placeholder = thisReview.title
-    newReviewText.innerText = thisReview.review
+    newReviewText.textContent = thisReview.review
+
+    addReview.addEventListener('click', event => {
+        reviewForm.classList.add('invisible')
+    
+        newReviewText.textContent = newReviewText.value
 
     
+    
+        thisReview.review = newReviewText.textContent
+
+        
+
+        //Handles finding the new rated star
+        let starIDArr = []
+        for (let i=0; i < newSStars.length; i++) {
+        let starID = (newSStars.item(i).classList.contains('checked'))
+       if(starID == true) {
+        starIDArr.push(starID)
+       }
+    }
+
+    thisReview.rating = starIDArr.length
+
+    displayReviews(reviews)  
+    })
 }
 
-addReview.addEventListener('click', event => {
-    reviewForm.classList.add('invisible')
-})
+
+
+
+
 
 //Removes the Review
 function removeReview(id) {
     reviews.splice(id, 1)
-
-
-
     displayReviews(reviews)
 }
+
+
+
+
+
+
 
 
 //Displays the reviews
@@ -90,22 +137,24 @@ function displayReviews(reviews) {
         let reviewMarkup = `<div class="newReview"><img src=${review.image} class="reviewImage" alt="Image of the Book"> 
         <div class="newReviewInfo"> <div id="stars-bottom"><h4>${review.title}</h4> <br>
        <p>${review.review}</p><button id="editBtn" onclick="editReview(${review.reviewID})" class="editBtn btn btn-white btn-animate" type="button">Edit</button> <button id="deleteBtn" onclick="removeReview(${review.reviewID})" class="editBtn btn btn-white btn-animate" type="button">Delete</button></div>`
-        
-
             
             
             bodyCards.insertAdjacentHTML('beforeend', reviewMarkup)
 
             bodyCards.insertAdjacentHTML('beforeend', displayStars(review.rating))
             
-    })
-
-    
-
+    }) 
 
 }
-
 displayReviews(reviews)
+
+
+
+
+
+
+
+
 
 
 //Handles the Star Rating
@@ -113,6 +162,7 @@ displayReviews(reviews)
 function selectStars(targetID) {
     for (let x=0; x < targetID; x++) {
         stars[x].classList.add('checked')
+        newSStars[x].classList.add('checked')
 }
 }
 
@@ -128,6 +178,24 @@ for (let i=0; i<stars.length; i++) {
        
 })}
 
+for (let i=0; i<newSStars.length; i++) {
+    editedStarRating.addEventListener('click', function handleClick(event) { 
+        newSStars[i].classList.remove('checked')
+        let target = event.target
+        targetID = target.id
+
+        selectStars(targetID)
+
+       
+})}
+
+
+
+
+
+
+
+
 
 
 
@@ -136,8 +204,6 @@ addBtn.addEventListener('click', event => {
 
     searchForm.classList.remove('invisible')
 })
-
-
 //Removes the Add A Review Form
 removeBtn.addEventListener('click', event => {
     searchForm.classList.add('invisible')
@@ -146,6 +212,16 @@ removeBtn.addEventListener('click', event => {
 backBtn.addEventListener('click', event => {
     reviewForm.classList.add('invisible')
 })
+
+
+
+
+
+
+
+
+
+
 
 //Adds a Review and removes the form  
 addReviewBtn.addEventListener('click', event => {
@@ -161,8 +237,6 @@ addReviewBtn.addEventListener('click', event => {
        }
     }
 
-   
-
 
     reviews.push({
         reviewID: reviews.length,
@@ -170,7 +244,7 @@ addReviewBtn.addEventListener('click', event => {
         review: reviewText.value,
         image: "images/orderofthephoenix.jpg",
         rating: starIDArr.length
-    })                                                          //Just need to get this value to show the amount of selected stars
+    })                                                          
 
     displayReviews(reviews)
     
