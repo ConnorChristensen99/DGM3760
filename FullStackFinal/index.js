@@ -14,6 +14,14 @@ app.use(cors({
  origin: '*'
 }))
 
+require('dotenv').config();
+const API = process.env.API_KEY;
+
+fetch(`https://www.googleapis.com/books/v1/volumes?q=search-terms&${API}`)
+  .then(response => response.json())
+  .then(result => {
+ console.log(result.items)
+})
 
 
 
@@ -49,8 +57,25 @@ app.get('/books', (req, res) => {
 
 app.post('/books', (req, res) => {
 
+    const todo = req.body.todo
+    console.log(todo)
 
+    const title = req.body.title
+    const description = req.body.description
+    const image = req.body.image
+    
+
+    interestedBooks.push({
+        bookID: interestedBooks.length,
+        title: title,
+        description: description,
+        image: image
+    })
+
+    res.send(interestedBooks)
 })
+
+
 
 
 

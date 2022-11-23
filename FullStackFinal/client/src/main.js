@@ -1,5 +1,4 @@
 
-
 //Interested Books JS
 let interestedBooks = [
     {
@@ -9,6 +8,13 @@ let interestedBooks = [
         image: "src/images/orderofthephoenix.jpg"
     }
 ]
+
+async function getBooks() {
+    let response = await fetch('/books')
+    let data = await response.json()
+
+    return data; 
+}
 
 
 let searchForm = document.getElementById('search-form')
@@ -71,15 +77,31 @@ removeBtn.addEventListener('click', event => {
 addBookBtn.addEventListener('click', event => {
     searchForm.classList.add('invisible')
 
-    interestedBooks.push({
-        bookID: interestedBooks.length,
-        title: 'Harry Potter and the Order of the Phoenix',
-        description: 'Now in his fifth year at Hogwarts, Harry (Daniel Radcliffe) learns that many in the wizarding community do not know the truth of his encounter with Lord Voldemort.',
-        image: "src/images/orderofthephoenix.jpg"
-    })
+    // fetch('/books', {
+    //     method: 'POST',
+    //     body: JSON.stringify({todo: "Hi"}),
+    //     headers: {
+    //         'Content-Type': 'application/json'       ''This Console Logs Hi in the server so it is connected
+    //     }
+    // })
+    // .then(res => res.json())
+    // .then(data =>  {
+    //     displayBooks(data)
+    // })
 
-    displayBooks(interestedBooks)
+    // interestedBooks.push({
+    //     bookID: interestedBooks.length,
+    //     title: 'Harry Potter and the Order of the Phoenix',
+    //     description: 'Now in his fifth year at Hogwarts, Harry (Daniel Radcliffe) learns that many in the wizarding community do not know the truth of his encounter with Lord Voldemort.',
+    //     image: "src/images/orderofthephoenix.jpg"
+    // })
+
+    // displayBooks(interestedBooks)
 })
 
+
+getBooks().then( books => {
+    displayBooks(books)
+})
 
 

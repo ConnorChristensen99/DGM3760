@@ -13,7 +13,12 @@ let reviews = [
 
 
 
-
+async function getReviews() {
+    let response = await fetch('/reviews')
+    let data = await response.json()
+    console.log(data)
+    return data; 
+}
 
 
 
@@ -250,3 +255,8 @@ addReviewBtn.addEventListener('click', event => {
     
 })
 
+
+
+getReviews().then( reviews => {
+    displayReviews(reviews)
+})
