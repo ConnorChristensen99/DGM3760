@@ -21,6 +21,7 @@ let addBtn = document.getElementById('add-book-btn')
 
 let removeBtn = document.getElementById('x')
 let addBookBtn = document.getElementById('addBook')
+let findBookBtn = document.getElementById('findBook')
 
 let bodyCards = document.getElementById('interestedCards')
 
@@ -73,10 +74,10 @@ addBtn.addEventListener('click', event => {
 removeBtn.addEventListener('click', event => {
     searchForm.classList.add('invisible')
 })
+ 
 
-//Adds a book and removes the form
-addBookBtn.addEventListener('click', event => {
-    searchForm.classList.add('invisible')
+//Finds a book
+findBookBtn.addEventListener('click', event => {
 
     console.log(searchBook.value)
     fetch('/books', {
@@ -85,11 +86,25 @@ addBookBtn.addEventListener('click', event => {
         headers: {
             'Content-Type': 'application/json' 
         }
-    })
+    }) 
     .then(res => res.json())
-    .then(data =>  {
+    .then(data =>  { 
         console.log(data)
+        for (let i = 1; i < data.length; i++) {
+             let newBooks = `     ${i}: ` + data[i].title + " "
+            searchForm.append(newBooks)
+
+            // data.addEventListener('click', event => {
+            //     console.log(this.id)
+            // })
+        }
     })
+
+})
+
+//Adds a book and removes the form
+addBookBtn.addEventListener('click', event => {
+    searchForm.classList.add('invisible')
 
     // interestedBooks.push({
     //     bookID: interestedBooks.length,

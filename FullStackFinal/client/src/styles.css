@@ -201,6 +201,15 @@
  margin-top: 10px;
 }
 
+.ADDBUTTON {
+  margin-top: 220px;
+  margin-left: 200px;
+}
+
+.FINDBUTTON {
+  margin-top: 220px;
+}
+
 .btn:link,
 .btn:visited {
   text-transform: uppercase;

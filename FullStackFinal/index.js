@@ -26,13 +26,16 @@ app.use(cors({
 require('dotenv').config();
 const API = process.env.API_KEY;
 
-fetch(`https://www.googleapis.com/books/v1/volumes?q=baking&${API}`)
-  .then(response => response.json())
-  .then(result => {
-    for(let i=0; i < result.items.length; i++) {
-        console.log(result.items[i].volumeInfo.title)
-    }
-})
+// fetch(`https://www.googleapis.com/books/v1/volumes?q=old+cars&${API}`)
+//   .then(response => response.json())
+//   .then(result => {
+//     for(let i=0; i < result.items.length; i++) {
+//         console.log(result.items[i].volumeInfo.title)
+//         console.log(result.items[i].volumeInfo.description)
+//         // console.log(result.items[i].volumeInfo.imageLinks.smallThumbnail)
+//         // console.log(result.items[i].volumeInfo.imageLinks.thumbnail)
+//     }
+// })
 
 
 
@@ -73,29 +76,33 @@ app.get('/books', (req, res) => {
 })
 
 
-
+ 
 
 
 app.post('/books', (req, res) => {
+    let possibleBooks = [{}]
 
+    let title = req.body.bookTitle
 
+    //finds books that match the given word
 
+    fetch(`https://www.googleapis.com/books/v1/volumes?q=${title}&${API}`)
+  .then(response => response.json())
+  .then(result => {
+    for(let i=1; i < result.items.length; i++) {
+        possibleBooks.push({
+            title: result.items[i].volumeInfo.title,
+            description: result.items[i].volumeInfo.description,
+            // image: result.items[i].volumeInfo.imageLinks.thumbnail
+        })
+    }
 
-//     let title = req.body.bookTitle
+    res.send(possibleBooks)
+})
 
-//     //finds books that match the given word
-
-//     fetch(`https://www.googleapis.com/books/v1/volumes?q=${title}&${API}`)
-//   .then(response => response.json())
-//   .then(result => {
-//     for(let i=0; i < result.items.length; i++) {
-//         res.send(result.items[i].volumeInfo.title)
-//     }
-// })
-
-
-
-
+ 
+  
+ 
 
 
 
