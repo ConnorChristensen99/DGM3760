@@ -26,6 +26,7 @@ let findBookBtn = document.getElementById('findBook')
 let bodyCards = document.getElementById('interestedCards')
 
 let searchBook = document.getElementById("searchForm")
+let searchedBookSpot = document.getElementById('searchedBooks')
 
 
 
@@ -78,6 +79,7 @@ removeBtn.addEventListener('click', event => {
 
 //Finds a book
 findBookBtn.addEventListener('click', event => {
+    searchedBookSpot.innerHTML
 
     console.log(searchBook.value)
     fetch('/books', {
@@ -90,14 +92,34 @@ findBookBtn.addEventListener('click', event => {
     .then(res => res.json())
     .then(data =>  { 
         console.log(data)
-        for (let i = 1; i < data.length; i++) {
-             let newBooks = `     ${i}: ` + data[i].title + " "
-            searchForm.append(newBooks)
 
-            // data.addEventListener('click', event => {
-            //     console.log(this.id)
-            // })
-        }
+        data.forEach((book)=>{
+            let description = book.description
+            let title = book.title
+            
+            let li = document.createElement("li");
+            let ul = document.createElement("ul");
+            ul.classList.add('searchedUL')
+
+            ul.appendChild(li)
+
+            li.classList.add('searchedItems');
+            li.innerText = title;
+
+            li.addEventListener('click', event => {
+                searchForm.classList.add('invisible')
+
+                interestedBooks.push( {
+                        bookID: interestedBooks.length,
+                        title: event.target.innerText,
+                        description: description,
+                        image: "#"
+                })
+                console.log(event.target)
+                displayBooks(interestedBooks)
+            })
+            searchedBookSpot.append(ul);
+          })
     })
 
 })

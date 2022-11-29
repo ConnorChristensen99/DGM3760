@@ -46,7 +46,7 @@
 
 
   /* NAV STYLING */
-  ul {
+  nav ul {
     list-style-type: none;
     margin-top: 10px;
     margin-bottom: 20px;
@@ -145,6 +145,23 @@
     height: 400px;
     background-color: rgb(12, 151, 243);
     position: absolute;
+    overflow: scroll;
+  }
+
+  .searchedItems {
+    list-style-type: none;
+    display: flex;
+    flex-direction: column;
+    text-transform: uppercase;
+    background-color: gainsboro;
+    padding: 2%;
+    width: 100%;
+  }
+
+  .searchedUL {
+    list-style-type: none;
+    margin-bottom: 20px;
+    overflow: hidden;
   }
 
   .searchForm, .reviewForm {
