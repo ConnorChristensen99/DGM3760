@@ -46,9 +46,9 @@ let newReviewText = document.getElementById('newReviewText')
 let editBtn = document.getElementById('editBtn')
 let addReview = document.getElementById('addReview')
 
-
-
-
+let searchedBookSpot = document.getElementById('searchedBooks')
+let findBookBtn = document.getElementById('findBook')
+let searchBook = document.getElementById("searchForm")
 
 
 
@@ -206,8 +206,8 @@ for (let i=0; i<newSStars.length; i++) {
 
 //Displays the Add A Review Form
 addBtn.addEventListener('click', event => {
-
     searchForm.classList.remove('invisible')
+    searchedBookSpot.innerText = ""
 })
 //Removes the Add A Review Form
 removeBtn.addEventListener('click', event => {
@@ -219,41 +219,70 @@ backBtn.addEventListener('click', event => {
 })
 
 
+//Finds a Book to review
+findBookBtn.addEventListener('click', event => {
 
+    fetch('/reviews', {
+        method: 'POST',
+        body: JSON.stringify({bookTitle: searchBook.value}),
+        headers: {
+            'Content-Type': 'application/json' 
+        }
+    }) 
+    .then(res => res.json())
+    .then(data =>  { 
+        console.log(data)
 
+        data.forEach((book)=>{
+            let description = book.description
+            let title = book.title
+            
+            let li = document.createElement("li");
+            let ul = document.createElement("ul");
+            ul.classList.add('searchedUL')
 
+            ul.appendChild(li)
 
+            li.classList.add('searchedItems');
+            li.innerText = title;
 
+            li.addEventListener('click', event => {
+                console.log(searchBook)
+                searchedBookSpot.innerText = ""
 
+                searchBook.value = event.target.innerText
 
-
-
-//Adds a Review and removes the form  
-addReviewBtn.addEventListener('click', event => {
-    searchForm.classList.add('invisible')
-
-    let starIDArr = []
-    for (let i=0; i < stars.length; i++) {
-       let starID = (stars.item(i).classList.contains('checked'))
-
-       if(starID == true) {
-        starIDArr.push(starID)
-
-       }
-    }
-
-
-    reviews.push({
-        reviewID: reviews.length,
-        title: 'Harry Potter and the Order of the Phoenix',
-        review: reviewText.value,
-        image: "images/orderofthephoenix.jpg",
-        rating: starIDArr.length
-    })                                                          
-
-    displayReviews(reviews)
+                 //Adds a Review and removes the form  
+            addReviewBtn.addEventListener('click', event => {
+                searchForm.classList.add('invisible')
     
+             let starIDArr = []
+              for (let i=0; i < stars.length; i++) {
+                let starID = (stars.item(i).classList.contains('checked'))
+    
+                if(starID == true) {
+                    starIDArr.push(starID)
+
+                   }
+                }
+    
+    
+              reviews.push({
+                  reviewID: reviews.length,
+                  title: book.title,
+                  review: reviewText.value,
+                  image: book.image.thumbnail,
+                  rating: starIDArr.length
+                })                                                          
+    
+              displayReviews(reviews)
+         })
+             })
+            searchedBookSpot.append(ul);
+        })
+    })
 })
+
 
 
 

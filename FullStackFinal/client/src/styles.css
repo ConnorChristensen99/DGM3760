@@ -224,9 +224,8 @@
 }
 
 .FINDBUTTON {
-  margin-top: 220px;
+  margin-bottom: 4%;
 }
-
 .btn:link,
 .btn:visited {
   text-transform: uppercase;
@@ -235,7 +234,6 @@
   display: inline-block;
   border-radius: 100px;
   transition: all .2s;
-  position: absolute;
 }
 
 .btn:hover {

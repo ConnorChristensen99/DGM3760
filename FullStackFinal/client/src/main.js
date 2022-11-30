@@ -55,12 +55,20 @@ displayBooks(interestedBooks)
 
 // //Removes item from the page when clicked
 function removeBook(id) {
-    console.log(interestedBooks)
 
-    interestedBooks.splice(id, 1)
+    fetch('/books', {
+        method: 'DELETE',
+        body: JSON.stringify({bookID: id}),
+        headers: {
+            'Content-Type': 'application/json' 
+        }
+    })
+    .then(res => res.json())
+    .then(data => {
+        console.log(data)
+    })
 
-
-
+ 
     displayBooks(interestedBooks)
 }
 
@@ -68,6 +76,7 @@ function removeBook(id) {
 //Displays the Add A Book Form
 addBtn.addEventListener('click', event => {
     searchForm.classList.remove('invisible')
+    searchedBookSpot.innerText = ""
 })
 
 
@@ -79,7 +88,6 @@ removeBtn.addEventListener('click', event => {
 
 //Finds a book
 findBookBtn.addEventListener('click', event => {
-    searchedBookSpot.innerHTML
 
     console.log(searchBook.value)
     fetch('/books', {
@@ -109,13 +117,13 @@ findBookBtn.addEventListener('click', event => {
             li.addEventListener('click', event => {
                 searchForm.classList.add('invisible')
 
+
                 interestedBooks.push( {
                         bookID: interestedBooks.length,
                         title: event.target.innerText,
                         description: description,
-                        image: "#"
+                        image: book.image.thumbnail
                 })
-                console.log(event.target)
                 displayBooks(interestedBooks)
             })
             searchedBookSpot.append(ul);
@@ -124,19 +132,7 @@ findBookBtn.addEventListener('click', event => {
 
 })
 
-//Adds a book and removes the form
-addBookBtn.addEventListener('click', event => {
-    searchForm.classList.add('invisible')
 
-    // interestedBooks.push({
-    //     bookID: interestedBooks.length,
-    //     title: 'Harry Potter and the Order of the Phoenix',
-    //     description: 'Now in his fifth year at Hogwarts, Harry (Daniel Radcliffe) learns that many in the wizarding community do not know the truth of his encounter with Lord Voldemort.',
-    //     image: "src/images/orderofthephoenix.jpg"
-    // })
-
-    // displayBooks(interestedBooks)
-})
 
 
 getBooks().then( books => {

@@ -32,9 +32,11 @@ const API = process.env.API_KEY;
 //     for(let i=0; i < result.items.length; i++) {
 //         console.log(result.items[i].volumeInfo.title)
 //         console.log(result.items[i].volumeInfo.description)
-//         // console.log(result.items[i].volumeInfo.imageLinks.smallThumbnail)
-//         // console.log(result.items[i].volumeInfo.imageLinks.thumbnail)
+//         console.log(result.items[i].volumeInfo.imageLinks) 
+
 //     }
+
+   
 // })
 
 
@@ -93,41 +95,25 @@ app.post('/books', (req, res) => {
         possibleBooks.push({
             title: result.items[i].volumeInfo.title,
             description: result.items[i].volumeInfo.description,
-            // image: result.items[i].volumeInfo.imageLinks.thumbnail
+            image: result.items[i].volumeInfo.imageLinks
         })
     }
-
+ 
     res.send(possibleBooks)
-})
-
- 
-  
- 
-
-
-
-
-
-// const title = req.body.bookTitle
-//     console.log(title)
-
-//     interestedBooks.push({
-//         bookID: interestedBooks.length,
-//         title: title,
-//         description: description,
-//         image: image
-//     })
-
-//     res.send(interestedBooks)
+}) 
 })
 
 
-
+ 
 
 
 
 app.delete('/books', (req, res) => { 
- 
+ let bookID = req.body.bookID
+
+ interestedBooks.splice(bookID, 1)
+
+ res.send(interestedBooks)
 })
 
 
@@ -146,7 +132,25 @@ app.get('/reviews', (req, res) => {
 
 
 app.post('/reviews', (req, res) => {
+    let possibleBooks = [{}]
 
+    let title = req.body.bookTitle
+
+    //finds books that match the given word
+
+    fetch(`https://www.googleapis.com/books/v1/volumes?q=${title}&${API}`)
+  .then(response => response.json())
+  .then(result => {
+    for(let i=1; i < result.items.length; i++) {
+        possibleBooks.push({
+            title: result.items[i].volumeInfo.title,
+            description: result.items[i].volumeInfo.description,
+            image: result.items[i].volumeInfo.imageLinks
+        })
+    }
+ 
+    res.send(possibleBooks)
+}) 
 
 })
 
