@@ -66,12 +66,11 @@ function removeBook(id) {
     .then(res => res.json())
     .then(data => {
         console.log(data)
+        displayBooks(interestedBooks)
+        window.location.reload()
     })
-
- 
-    displayBooks(interestedBooks)
 }
-
+ 
 
 //Displays the Add A Book Form
 addBtn.addEventListener('click', event => {
@@ -89,8 +88,7 @@ removeBtn.addEventListener('click', event => {
 //Finds a book
 findBookBtn.addEventListener('click', event => {
 
-    console.log(searchBook.value)
-    fetch('/books', {
+    fetch('/possibleBooks', {
         method: 'POST',
         body: JSON.stringify({bookTitle: searchBook.value}),
         headers: {
@@ -116,20 +114,28 @@ findBookBtn.addEventListener('click', event => {
 
             li.addEventListener('click', event => {
                 searchForm.classList.add('invisible')
-
-
+                let image = book.image.thumbnail
+                
                 interestedBooks.push( {
                         bookID: interestedBooks.length,
                         title: event.target.innerText,
                         description: description,
-                        image: book.image.thumbnail
+                        image: image
                 })
                 displayBooks(interestedBooks)
+
+                
+                fetch('/books', {
+                    method: 'POST',
+                    body: JSON.stringify({title: title, description: description, image: image, bookID: interestedBooks.length}),
+                    headers: {
+                        'Content-Type': 'application/json' 
+                    }
+                }) 
             })
             searchedBookSpot.append(ul);
           })
     })
-
 })
 
 

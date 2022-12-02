@@ -16,7 +16,6 @@ let reviews = [
 async function getReviews() {
     let response = await fetch('/reviews')
     let data = await response.json()
-    console.log(data)
     return data; 
 }
 
@@ -61,9 +60,9 @@ let newStars = []
     for (let i=0; i < rating; i++) {
 
         if (i < rating) {
-             star = `<span class="fa fa-star fa-2x checked"></span>`
+             star = `<span class="fa fa-star fa-2x reviewStars checked"></span>`
         }if( i > rating) {                                                      
-             star = `<span class="fa fa-star fa-2x"></span>`
+             star = `<span class="fa fa-star reviewStars fa-2x"></span>`
         }
          newStars.push(star)
      }   
@@ -120,10 +119,22 @@ function editReview(id) {
 
 
 
-//Removes the Review
+// //Removes item from the page when clicked
 function removeReview(id) {
-    reviews.splice(id, 1)
-    displayReviews(reviews)
+
+    fetch('/reviews', {
+        method: 'DELETE',
+        body: JSON.stringify({bookID: id}),
+        headers: {
+            'Content-Type': 'application/json' 
+        }
+    })
+    .then(res => res.json())
+    .then(data => {
+        console.log(data)
+        displayReviews(reviews)
+        window.location.reload()
+    })
 }
 
 
@@ -139,7 +150,7 @@ function displayReviews(reviews) {
     bodyCards.innerHTML = ""
 
     reviews.forEach(review => {
-        let reviewMarkup = `<div class="newReview"><img src=${review.image} class="reviewImage" alt="Image of the Book"> 
+        let reviewMarkup = `<div class="newReview"><img src=${review.image} class="reviewImage" alt="Image of the Book" style="width:150px;height:150px;"> 
         <div class="newReviewInfo"> <div id="stars-bottom"><h4>${review.title}</h4> <br>
        <p>${review.review}</p><button id="editBtn" onclick="editReview(${review.reviewID})" class="editBtn btn btn-white btn-animate" type="button">Edit</button> <button id="deleteBtn" onclick="removeReview(${review.reviewID})" class="editBtn btn btn-white btn-animate" type="button">Delete</button></div>`
             
@@ -222,7 +233,7 @@ backBtn.addEventListener('click', event => {
 //Finds a Book to review
 findBookBtn.addEventListener('click', event => {
 
-    fetch('/reviews', {
+    fetch('/possibleReviews', {
         method: 'POST',
         body: JSON.stringify({bookTitle: searchBook.value}),
         headers: {
@@ -234,7 +245,6 @@ findBookBtn.addEventListener('click', event => {
         console.log(data)
 
         data.forEach((book)=>{
-            let description = book.description
             let title = book.title
             
             let li = document.createElement("li");
@@ -247,7 +257,7 @@ findBookBtn.addEventListener('click', event => {
             li.innerText = title;
 
             li.addEventListener('click', event => {
-                console.log(searchBook)
+
                 searchedBookSpot.innerText = ""
 
                 searchBook.value = event.target.innerText
@@ -259,23 +269,35 @@ findBookBtn.addEventListener('click', event => {
              let starIDArr = []
               for (let i=0; i < stars.length; i++) {
                 let starID = (stars.item(i).classList.contains('checked'))
-    
                 if(starID == true) {
                     starIDArr.push(starID)
-
                    }
                 }
-    
-    
+
+                let reviewID = reviews.length
+                let title = book.title
+                let review = reviewText.value
+                let image = book.image.thumbnail
+                let rating = starIDArr.length
+
               reviews.push({
-                  reviewID: reviews.length,
-                  title: book.title,
-                  review: reviewText.value,
-                  image: book.image.thumbnail,
-                  rating: starIDArr.length
+                  reviewID: reviewID,
+                  title: title, 
+                  review: review,
+                  image: image,
+                  rating: rating
                 })                                                          
-    
+     
               displayReviews(reviews)
+
+              fetch('/reviews', {
+                method: 'POST',
+                body: JSON.stringify({title: title, review: review, image: image, reviewID: reviewID, rating: rating}),
+                headers: {
+                    'Content-Type': 'application/json' 
+                }
+            }).then(res => res.json())
+            .then(data =>{displayReviews(data)})
          })
              })
             searchedBookSpot.append(ul);

@@ -170,6 +170,7 @@
   margin: 8px 0 20px 0;
   margin-right: 16px;
   font-size: 17px;
+  transform-style: preserve-3d;
   }
 
   textarea {
@@ -236,6 +237,8 @@
   transition: all .2s;
 }
 
+
+
 .btn:hover {
   transform: translateY(-3px);
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
@@ -292,7 +295,6 @@ p {
     padding: 2% 0% 5% 0%;
     display: flex;
     border: #111 1px solid;
-    margin-bottom: -40px
   }
 
   .newReviewInfo {
@@ -304,8 +306,6 @@ p {
   .reviewImage {
     float: left;
     margin: 20px;
-    width: 90px;
-    height: auto;
   }
 
   .rating {
@@ -313,11 +313,20 @@ p {
     display: flex;
     width: 180px;
  }
-
+.reviewStars {
+  z-index: -1;
+  transform: translateY(-40px);
+  display: none;
+}
 
  .rating__star {
     cursor: pointer;
     color: #dabd18b2;
+    
+ }
+
+ .reviewStarDisappear {
+  color: transparent;
  }
  
 

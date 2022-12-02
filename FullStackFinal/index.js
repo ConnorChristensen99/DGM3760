@@ -79,16 +79,13 @@ app.get('/books', (req, res) => {
 
 
  
-
-
-app.post('/books', (req, res) => {
+app.post('/possibleBooks', (req, res) => {
     let possibleBooks = [{}]
 
     let title = req.body.bookTitle
 
     //finds books that match the given word
-
-    fetch(`https://www.googleapis.com/books/v1/volumes?q=${title}&${API}`)
+  fetch(`https://www.googleapis.com/books/v1/volumes?q=${title}&${API}`)
   .then(response => response.json())
   .then(result => {
     for(let i=1; i < result.items.length; i++) {
@@ -103,6 +100,21 @@ app.post('/books', (req, res) => {
 }) 
 })
 
+app.post('/books', (req, res) => {
+    let title = req.body.title
+    let description = req.body.description
+    let bookID = req.body.bookID
+    let image = req.body.image
+  
+    interestedBooks.push( {
+        bookID: bookID,
+        title: title,
+        description: description,
+        image: image
+})
+    res.send(interestedBooks)
+})
+
 
  
 
@@ -110,7 +122,6 @@ app.post('/books', (req, res) => {
 
 app.delete('/books', (req, res) => { 
  let bookID = req.body.bookID
-
  interestedBooks.splice(bookID, 1)
 
  res.send(interestedBooks)
@@ -129,16 +140,14 @@ app.get('/reviews', (req, res) => {
     res.send(reviews)
 })
 
-
-
-app.post('/reviews', (req, res) => {
+app.post('/possibleReviews', (req, res) => {
     let possibleBooks = [{}]
 
     let title = req.body.bookTitle
 
     //finds books that match the given word
 
-    fetch(`https://www.googleapis.com/books/v1/volumes?q=${title}&${API}`)
+  fetch(`https://www.googleapis.com/books/v1/volumes?q=${title}&${API}`)
   .then(response => response.json())
   .then(result => {
     for(let i=1; i < result.items.length; i++) {
@@ -151,10 +160,28 @@ app.post('/reviews', (req, res) => {
  
     res.send(possibleBooks)
 }) 
-
 })
 
 
+
+app.post('/reviews', (req, res) => {
+    let title = req.body.title
+    let review =req.body.review
+    let image = req.body.image
+    let reviewID = req.body.reviewID
+    let rating = req.body.rating
+
+    reviews.push({
+        reviewID: reviewID,
+        title: title, 
+        review: review,
+        image: image,
+        rating: rating
+      })     
+
+      res.send(reviews)
+
+}) 
 
 
 
@@ -169,8 +196,12 @@ app.put('/reviews', (req, res) => {
 
 
 app.delete('/reviews', (req, res) => { 
- 
-})
+    let bookID = req.body.bookID
+    reviews.splice(bookID, 1)
+   
+    res.send(reviews)
+   })
+   
 
 
 
