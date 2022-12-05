@@ -295,6 +295,7 @@ p {
     padding: 2% 0% 5% 0%;
     display: flex;
     border: #111 1px solid;
+    margin-bottom: -40px;
   }
 
   .newReviewInfo {
@@ -313,11 +314,6 @@ p {
     display: flex;
     width: 180px;
  }
-.reviewStars {
-  z-index: -1;
-  transform: translateY(-40px);
-  display: none;
-}
 
  .rating__star {
     cursor: pointer;

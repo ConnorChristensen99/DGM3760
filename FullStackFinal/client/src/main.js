@@ -15,7 +15,6 @@ async function getBooks() {
     return data; 
 }
 
-
 let searchForm = document.getElementById('search-form')
 let addBtn = document.getElementById('add-book-btn')
 
@@ -33,6 +32,9 @@ let searchedBookSpot = document.getElementById('searchedBooks')
 
 //Displays the books
 function displayBooks(interestedBooks) {
+    interestedBooks.forEach(book => {
+        // console.log(book.bookID)
+    })
     bodyCards.innerHTML = ""
 
     interestedBooks.forEach(book => {
@@ -75,7 +77,7 @@ function removeBook(id) {
 //Displays the Add A Book Form
 addBtn.addEventListener('click', event => {
     searchForm.classList.remove('invisible')
-    searchedBookSpot.innerText = ""
+    searchedBookSpot.textContent = ""
 })
 
 
@@ -86,8 +88,9 @@ removeBtn.addEventListener('click', event => {
  
 
 //Finds a book
-findBookBtn.addEventListener('click', event => {
 
+findBookBtn.addEventListener('click', event => {
+    let id = interestedBooks.length
     fetch('/possibleBooks', {
         method: 'POST',
         body: JSON.stringify({bookTitle: searchBook.value}),
@@ -97,8 +100,6 @@ findBookBtn.addEventListener('click', event => {
     }) 
     .then(res => res.json())
     .then(data =>  { 
-        console.log(data)
-
         data.forEach((book)=>{
             let description = book.description
             let title = book.title
@@ -117,17 +118,18 @@ findBookBtn.addEventListener('click', event => {
                 let image = book.image.thumbnail
                 
                 interestedBooks.push( {
-                        bookID: interestedBooks.length,
+                        bookID: id,
                         title: event.target.innerText,
                         description: description,
                         image: image
                 })
                 displayBooks(interestedBooks)
+                console.log(interestedBooks)
 
                 
                 fetch('/books', {
                     method: 'POST',
-                    body: JSON.stringify({title: title, description: description, image: image, bookID: interestedBooks.length}),
+                    body: JSON.stringify({title: title, description: description, image: image, bookID: id}),
                     headers: {
                         'Content-Type': 'application/json' 
                     }

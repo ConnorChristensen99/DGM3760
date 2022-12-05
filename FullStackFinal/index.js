@@ -96,7 +96,9 @@ app.post('/possibleBooks', (req, res) => {
         })
     }
  
+    possibleBooks.splice(0, 1)
     res.send(possibleBooks)
+
 }) 
 })
 
@@ -113,6 +115,7 @@ app.post('/books', (req, res) => {
         image: image
 })
     res.send(interestedBooks)
+
 })
 
 
@@ -150,7 +153,7 @@ app.post('/possibleReviews', (req, res) => {
   fetch(`https://www.googleapis.com/books/v1/volumes?q=${title}&${API}`)
   .then(response => response.json())
   .then(result => {
-    for(let i=1; i < result.items.length; i++) {
+    for(let i=0; i < result.items.length; i++) {
         possibleBooks.push({
             title: result.items[i].volumeInfo.title,
             description: result.items[i].volumeInfo.description,

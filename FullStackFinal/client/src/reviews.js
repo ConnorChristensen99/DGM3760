@@ -79,7 +79,7 @@ let newStars = []
 //Display the selected Review for edit    
 function editReview(id) {
     reviewForm.classList.remove('invisible')
-
+ 
 
     let thisReview = reviews.find(review => id == review.reviewID)
 
@@ -194,7 +194,7 @@ for (let i=0; i<stars.length; i++) {
        
 })}
 
-for (let i=0; i<newSStars.length; i++) {
+for (let i=0; i<newSStars.length; i++) { 
     editedStarRating.addEventListener('click', function handleClick(event) { 
         newSStars[i].classList.remove('checked')
         let target = event.target
@@ -232,6 +232,7 @@ backBtn.addEventListener('click', event => {
 
 //Finds a Book to review
 findBookBtn.addEventListener('click', event => {
+
 
     fetch('/possibleReviews', {
         method: 'POST',
