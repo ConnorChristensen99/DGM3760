@@ -11,20 +11,28 @@ app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
 
 const cors = require('cors')
 app.use(cors({
- origin: '*'
 }))
-
-
-
-
-
-
-
-
-
-//Gets the books from the API
 require('dotenv').config();
+const mongoose = require('mongoose');
 const API = process.env.API_KEY;
+
+
+ 
+
+const { MongoClient, ServerApiVersion } = require('mongodb');
+const uri = process.env.MONGO_URI;
+ 
+
+
+
+mongoose.connect(
+    uri,
+    {
+        useNewUrlParser: true
+    }
+)
+.then(e => console.log('MongoDB Ready!'))
+.catch(console.error)
 
 // fetch(`https://www.googleapis.com/books/v1/volumes?q=old+cars&${API}`)
 //   .then(response => response.json())
@@ -33,16 +41,33 @@ const API = process.env.API_KEY;
 //         console.log(result.items[i].volumeInfo.title)
 //         console.log(result.items[i].volumeInfo.description)
 //         console.log(result.items[i].volumeInfo.imageLinks) 
-
 //     }
-
-   
 // })
 
 
 
 
+const {model, Schema} = require('mongoose')
+const bookSchema = new Schema({
+    id: Number,
+    title: String,
+    description: String,
+    image: String
+})
 
+const Book = model("books", bookSchema)
+
+
+//Category Schema
+const reviewSchema = new Schema ({
+    id: Number,
+    title: String,
+    description: String,
+    image: String,
+    rating: Number
+})
+
+const Review = model('reviews', reviewSchema)
 
 
 
