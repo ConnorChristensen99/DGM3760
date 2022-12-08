@@ -80,37 +80,41 @@ let newStars = []
 function editReview(id) {
     reviewForm.classList.remove('invisible')
  
-
+    
     let thisReview = reviews.find(review => id == review.reviewID)
-
-
-
+    let thisReviewID = thisReview.reviewID
     placeHolder.placeholder = thisReview.title
     newReviewText.textContent = thisReview.review
 
     addReview.addEventListener('click', event => {
         reviewForm.classList.add('invisible')
+            //Handles finding the new rated star
+            let starIDArr = []
+            for (let i=0; i < newSStars.length; i++) {
+            let starID = (newSStars.item(i).classList.contains('checked'))
+           if(starID == true) {
+            starIDArr.push(starID)
+           }
+        }
     
+        thisReview.rating = starIDArr.length
         newReviewText.textContent = newReviewText.value
-
-    
-    
         thisReview.review = newReviewText.textContent
 
-        
 
-        //Handles finding the new rated star
-        let starIDArr = []
-        for (let i=0; i < newSStars.length; i++) {
-        let starID = (newSStars.item(i).classList.contains('checked'))
-       if(starID == true) {
-        starIDArr.push(starID)
-       }
-    }
-
-    thisReview.rating = starIDArr.length
-
-    displayReviews(reviews)  
+        fetch('/reviews', {
+            method: 'PUT', 
+            body: JSON.stringify({bookID: thisReviewID, newReview: thisReview.review, newStars: thisReview.rating}),
+            headers: {
+                'Content-Type': 'application/json' 
+            }
+        })
+        .then(res => res.json())
+        .then(data => {
+            console.log(data)
+            displayReviews(reviews)  
+        })
+   
     })
 }
 

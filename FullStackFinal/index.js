@@ -49,7 +49,7 @@ mongoose.connect(
 
 const {model, Schema} = require('mongoose')
 const bookSchema = new Schema({
-    id: Number,
+    bookID: Number,
     title: String,
     description: String,
     image: String
@@ -60,9 +60,9 @@ const Book = model("books", bookSchema)
 
 //Category Schema
 const reviewSchema = new Schema ({
-    id: Number,
+    reviewID: Number,
     title: String,
-    description: String,
+    review: String,
     image: String,
     rating: Number
 })
@@ -141,10 +141,26 @@ app.post('/books', (req, res) => {
 })
     res.send(interestedBooks)
 
+
+        ////Add New Book IN DATABASE
+
+const newBook = new Book({
+    bookID: bookID,
+    title: title,
+    description: description,
+    image: image,
+})
+
+newBook.save().then(doc => {
+    console.log("New Book Saved")
+})
+
 })
 
 
  
+
+
 
 
 
@@ -153,6 +169,11 @@ app.delete('/books', (req, res) => {
  interestedBooks.splice(bookID, 1)
 
  res.send(interestedBooks)
+
+     ////Deletes Items in  the database
+const deleteBook = async(bookID) => {
+    await Book.deleteOne({bookID})    
+}   
 })
 
 
@@ -185,7 +206,7 @@ app.post('/possibleReviews', (req, res) => {
             image: result.items[i].volumeInfo.imageLinks
         })
     }
- 
+    possibleBooks.splice(0, 1)
     res.send(possibleBooks)
 }) 
 })
@@ -209,14 +230,55 @@ app.post('/reviews', (req, res) => {
 
       res.send(reviews)
 
+
+              ////Add New Review IN DATABASE
+
+const newReview = new Review({
+    reviewID: reviewID,
+    title: title,
+    review: review,
+    image: image,
+    rating: rating
+})
+
+newReview.save().then(doc => {
+    console.log("New Review Saved") 
+})
+
 }) 
 
 
 
 app.put('/reviews', (req, res) => { 
- 
-    
-    
+    const updatedID = req.body.bookID
+    const updatedReview = req.body.newReview
+    const updatedStarCount = req.body.newStars
+
+    for (let i = 0; i < reviews.length; i++) {
+     
+        const elem = reviews[i];
+        if(elem.reviewID == updatedID) {
+            elem.review = updatedReview
+            elem.rating = updatedStarCount
+        }
+    }
+    res.send(reviews)
+
+        // ////Updates the Database
+
+const editReview = async(updatedID) => {
+    const foundReview = await Review.findOne({updatedID})
+
+    if(!review) {
+        throw new Error('Todo not Found!')
+    }
+
+    foundReview.review = updatedReview
+    foundReview.rating = updatedStarCount
+
+    const result = await Review.save()
+    console.log(result)
+}
 })
 
 
@@ -228,6 +290,11 @@ app.delete('/reviews', (req, res) => {
     reviews.splice(bookID, 1)
    
     res.send(reviews)
+
+         ////Deletes review in  the database
+const deleteReview = async(bookID) => {
+    await Review.deleteOne({bookID})    
+}  
    })
    
 
