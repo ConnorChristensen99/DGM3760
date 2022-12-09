@@ -51,7 +51,7 @@ let searchBook = document.getElementById("searchForm")
 
 
 
-
+ 
 
 //Displays the Stars
 function displayStars(rating) {         
@@ -79,9 +79,9 @@ let newStars = []
 //Display the selected Review for edit    
 function editReview(id) {
     reviewForm.classList.remove('invisible')
- 
-    
+
     let thisReview = reviews.find(review => id == review.reviewID)
+
     let thisReviewID = thisReview.reviewID
     placeHolder.placeholder = thisReview.title
     newReviewText.textContent = thisReview.review
@@ -150,6 +150,9 @@ function removeReview(id) {
 
 //Displays the reviews
 function displayReviews(reviews) {
+    for (let i = 0; i < reviews.length; i++) {
+        reviews[i].reviewID = i
+    }
     
     bodyCards.innerHTML = ""
 
@@ -222,7 +225,6 @@ for (let i=0; i<newSStars.length; i++) {
 //Displays the Add A Review Form
 addBtn.addEventListener('click', event => {
     searchForm.classList.remove('invisible')
-    searchedBookSpot.innerText = ""
 })
 //Removes the Add A Review Form
 removeBtn.addEventListener('click', event => {

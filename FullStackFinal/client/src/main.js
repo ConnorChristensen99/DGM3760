@@ -1,11 +1,5 @@
 //Interested Books JS
 let interestedBooks = [
-    {
-        bookID: 0,
-        title: 'Harry Potter and the Order of the Phoenix',
-        description: 'Now in his fifth year at Hogwarts, Harry (Daniel Radcliffe) learns that many in the wizarding community do not know the truth of his encounter with Lord Voldemort.',
-        image: "src/images/orderofthephoenix.jpg"
-    }
 ]
 
 async function getBooks() {
@@ -32,9 +26,10 @@ let searchedBookSpot = document.getElementById('searchedBooks')
 
 //Displays the books
 function displayBooks(interestedBooks) {
-    interestedBooks.forEach(book => {
-        // console.log(book.bookID)
-    })
+    for (let i = 0; i < interestedBooks.length; i++) {
+        interestedBooks[i].bookID = i
+    }
+
     bodyCards.innerHTML = ""
 
     interestedBooks.forEach(book => {
@@ -57,12 +52,11 @@ displayBooks(interestedBooks)
 
 // //Removes item from the page when clicked
 function removeBook(id) {
-
     fetch('/books', {
         method: 'DELETE',
         body: JSON.stringify({bookID: id}),
         headers: {
-            'Content-Type': 'application/json' 
+            'Content-Type': 'application/json'  
         }
     })
     .then(res => res.json())
@@ -70,7 +64,7 @@ function removeBook(id) {
         console.log(data)
         displayBooks(interestedBooks)
         window.location.reload()
-    })
+    }) 
 }
  
 
@@ -88,7 +82,6 @@ removeBtn.addEventListener('click', event => {
  
 
 //Finds a book
-
 findBookBtn.addEventListener('click', event => {
     let id = interestedBooks.length
     fetch('/possibleBooks', {
@@ -123,17 +116,16 @@ findBookBtn.addEventListener('click', event => {
                         description: description,
                         image: image
                 })
-                displayBooks(interestedBooks)
-                console.log(interestedBooks)
-
-                
+               
                 fetch('/books', {
                     method: 'POST',
                     body: JSON.stringify({title: title, description: description, image: image, bookID: id}),
                     headers: {
                         'Content-Type': 'application/json' 
                     }
-                }) 
+                }).then(res => res.json())
+                .then(data => {(displayBooks(interestedBooks))})
+                window.location.reload()
             })
             searchedBookSpot.append(ul);
           })
