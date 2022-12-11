@@ -253,6 +253,7 @@ findBookBtn.addEventListener('click', event => {
 
         data.forEach((book)=>{
             let title = book.title
+            let bookid = book.id
             
             let li = document.createElement("li");
             let ul = document.createElement("ul");
@@ -261,7 +262,7 @@ findBookBtn.addEventListener('click', event => {
             ul.appendChild(li)
 
             li.classList.add('searchedItems');
-            li.innerText = title;
+            li.innerText = bookid + ".  " + title;
 
             li.addEventListener('click', event => {
 

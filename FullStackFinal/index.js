@@ -34,15 +34,13 @@ mongoose.connect(
 .then(e => console.log('MongoDB Ready!'))
 .catch(console.error)
 
-// fetch(`https://www.googleapis.com/books/v1/volumes?q=old+cars&${API}`)
-//   .then(response => response.json())
-//   .then(result => {
-//     for(let i=0; i < result.items.length; i++) {
-//         console.log(result.items[i].volumeInfo.title)
-//         console.log(result.items[i].volumeInfo.description)
-//         console.log(result.items[i].volumeInfo.imageLinks) 
-//     }
-// })
+fetch(`https://www.googleapis.com/books/v1/volumes?q=old+cars&${API}`)
+  .then(response => response.json())
+  .then(result => {
+    for(let i=0; i < result.items.length; i++) {
+        console.log(result.items[i].volumeInfo.maturityRating)
+    }
+})
 
 
 
@@ -115,6 +113,7 @@ app.post('/possibleBooks', (req, res) => {
   .then(result => {
     for(let i=1; i < result.items.length; i++) {
         possibleBooks.push({
+            id: i,
             title: result.items[i].volumeInfo.title,
             description: result.items[i].volumeInfo.description,
             image: result.items[i].volumeInfo.imageLinks
@@ -199,8 +198,9 @@ app.post('/possibleReviews', (req, res) => {
   fetch(`https://www.googleapis.com/books/v1/volumes?q=${title}&${API}`)
   .then(response => response.json())
   .then(result => {
-    for(let i=0; i < result.items.length; i++) {
+    for(let i=1; i < result.items.length; i++) {
         possibleBooks.push({
+            id: i,
             title: result.items[i].volumeInfo.title,
             description: result.items[i].volumeInfo.description,
             image: result.items[i].volumeInfo.imageLinks

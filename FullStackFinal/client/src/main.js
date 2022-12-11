@@ -13,6 +13,7 @@ let searchForm = document.getElementById('search-form')
 let addBtn = document.getElementById('add-book-btn')
 
 let removeBtn = document.getElementById('x')
+let removeBtns = document.getElementById('y')
 let addBookBtn = document.getElementById('addBook')
 let findBookBtn = document.getElementById('findBook')
 
@@ -20,7 +21,9 @@ let bodyCards = document.getElementById('interestedCards')
 
 let searchBook = document.getElementById("searchForm")
 let searchedBookSpot = document.getElementById('searchedBooks')
-
+let shareScreen = document.getElementById('shareScreen')
+let sendBook = document.getElementById('sendBook')
+let sendList = document.getElementById('sendList')
 
 
 
@@ -37,7 +40,8 @@ function displayBooks(interestedBooks) {
         <div class="newInterestedInfo"> <h4>${book.title}</h4> <br>
         <p>${book.description}</p></div> 
         <div class="interestedIcon">
-                <button id="deleteBtn" onclick="removeBook(${book.bookID})" class="editBtn btn btn-white btn-animate" type="button">Delete</button>
+                <button id="deleteBtn" onclick="removeBook(${book.bookID})" class="editBtn btn btn-white btn-animate" type="button">Delete</button> 
+                <button id="shareBtn" onclick="showScreen()" class="editBtn btn btn-white btn-animate" type="button">Share with Friends</button> 
                 
             </div>`
 
@@ -49,7 +53,10 @@ function displayBooks(interestedBooks) {
 
 displayBooks(interestedBooks)
 
-
+//Shows the share screen
+function showScreen() {
+    shareScreen.classList.remove('invisible')
+}
 // //Removes item from the page when clicked
 function removeBook(id) {
     fetch('/books', {
@@ -74,10 +81,19 @@ addBtn.addEventListener('click', event => {
     searchedBookSpot.textContent = ""
 })
 
+sendBook.addEventListener('click', event => {
+    shareScreen.classList.add('invisible')
+})
 
+sendList.addEventListener('click', event => {
+    shareScreen.classList.remove('invisible')
+})
 //Removes the Add A Book Form
 removeBtn.addEventListener('click', event => {
     searchForm.classList.add('invisible')
+})
+removeBtns.addEventListener('click', event => {
+    shareScreen.classList.add('invisible')
 })
  
 
@@ -91,12 +107,13 @@ findBookBtn.addEventListener('click', event => {
             'Content-Type': 'application/json' 
         }
     }) 
-    .then(res => res.json())
+    .then(res => res.json()) 
     .then(data =>  { 
         data.forEach((book)=>{
             let description = book.description
             let title = book.title
-            
+            let bookid = book.id
+
             let li = document.createElement("li");
             let ul = document.createElement("ul");
             ul.classList.add('searchedUL')
@@ -104,7 +121,7 @@ findBookBtn.addEventListener('click', event => {
             ul.appendChild(li)
 
             li.classList.add('searchedItems');
-            li.innerText = title;
+            li.innerText = bookid + ".  " + title;
 
             li.addEventListener('click', event => {
                 searchForm.classList.add('invisible')

@@ -154,9 +154,16 @@
     display: flex;
     flex-direction: column;
     text-transform: uppercase;
-    background-color: gainsboro;
+    background-color: white;
     padding: 2%;
     width: 100%;
+    border-radius: 5px;
+    box-shadow: inset 0 0 10px gray;
+  }
+
+  .searchedItems:hover {
+    background-color: gray;
+    cursor: pointer;
   }
 
   .searchedUL {
@@ -196,7 +203,36 @@
   width: 80px;
 }
 
-#x, #back {
+#shareBtn {
+  width: 80px;
+  padding: 3px;
+  margin-top: 5px;
+}
+
+#shareScreen {
+  padding: 10px;
+    width: 750px;
+    height: 400px;
+    background-color: rgb(12, 151, 243);
+    position: absolute;
+    overflow: scroll;
+}
+
+#info {
+  display: flex;
+  justify-content: space-between;
+}
+.SENDLIST {
+  border: 1px solid black;
+  display: flex;
+  align-items: flex-end;
+}
+
+#sendList {
+  width: 300px;
+}
+
+#x, #back, #y {
   text-decoration: none;
   color: #111;
   display: block;
