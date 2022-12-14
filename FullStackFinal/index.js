@@ -34,13 +34,13 @@ mongoose.connect(
 .then(e => console.log('MongoDB Ready!'))
 .catch(console.error)
 
-fetch(`https://www.googleapis.com/books/v1/volumes?q=old+cars&${API}`)
-  .then(response => response.json())
-  .then(result => {
-    for(let i=0; i < result.items.length; i++) {
-        console.log(result.items[i].volumeInfo.maturityRating)
-    }
-})
+// fetch(`https://www.googleapis.com/books/v1/volumes?q=old+cars&${API}`)
+//   .then(response => response.json())
+//   .then(result => {
+//     for(let i=0; i < result.items.length; i++) {
+//         console.log(result.items[i].volumeInfo.maturityRating)
+//     }
+// })
 
 
 

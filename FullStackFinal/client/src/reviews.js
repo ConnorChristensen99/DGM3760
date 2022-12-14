@@ -57,18 +57,18 @@ let searchBook = document.getElementById("searchForm")
 function displayStars(rating) {         
 let newStars = []
     
-    for (let i=0; i < rating; i++) {
+    for (let i=0; i <= 5; i++) {
 
         if (i < rating) {
-             star = `<span class="fa fa-star fa-2x reviewStars checked"></span>`
-        }if( i > rating) {                                                      
-             star = `<span class="fa fa-star reviewStars fa-2x"></span>`
-        }
+             star = `   <span class="fa fa-star fa-2x reviewStars checked">   </span>`
+        }else{ star = `   <span class="fa fa-star reviewStars fa-2x">   </span>`
+    }                                                      
          newStars.push(star)
      }   
 
+        newStars.pop()
         return newStars.join("")
-
+        
 }
 
 
@@ -159,13 +159,14 @@ function displayReviews(reviews) {
     reviews.forEach(review => {
         let reviewMarkup = `<div class="newReview"><img src=${review.image} class="reviewImage" alt="Image of the Book" style="width:150px;height:150px;"> 
         <div class="newReviewInfo"> <div id="stars-bottom"><h4>${review.title}</h4> <br>
-       <p>${review.review}</p><button id="editBtn" onclick="editReview(${review.reviewID})" class="editBtn btn btn-white btn-animate" type="button">Edit</button> <button id="deleteBtn" onclick="removeReview(${review.reviewID})" class="editBtn btn btn-white btn-animate" type="button">Delete</button></div>`
+       <p>${review.review}</p><button id="editBtn" onclick="editReview(${review.reviewID})" class="editBtn btn btn-white btn-animate" type="button">Edit</button> <button id="deleteBtn" onclick="removeReview(${review.reviewID})" class="editBtn btn btn-white btn-animate" type="button">Delete</button></div>   
+       <div></div>`
             
             
             bodyCards.insertAdjacentHTML('beforeend', reviewMarkup)
 
             bodyCards.insertAdjacentHTML('beforeend', displayStars(review.rating))
-            
+
     }) 
 
 }

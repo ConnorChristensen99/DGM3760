@@ -49,7 +49,6 @@
   nav ul {
     list-style-type: none;
     margin-top: 10px;
-    margin-bottom: 20px;
     overflow: hidden;
     background-color: #333;
   }
@@ -74,6 +73,33 @@
     background-color: #04AA6D;
   }
 
+  .active2 {
+    background-color: #156648;
+  }
+  #lowerNav {
+    list-style-type: none;
+    margin-bottom: 20px;
+    overflow: hidden;
+    background-color: #333;
+    height: 30px;
+    display: flex;
+    align-items: center;
+  }
+
+  #lowerNav ul {
+    list-style-type: none;
+  }
+
+  .ADDLISTHOME {
+    background-color: rgb(66, 65, 65);
+  }
+
+  #addList {
+    background-color: rgb(12, 151, 243);
+    padding: 2%;
+    box-shadow: inset 0px 0px 5px 5px #acabaa;
+    border: none;
+  }
 
   .reviewSearch {
   width: 100%;
@@ -218,7 +244,7 @@
     overflow: scroll;
 }
 
-#info {
+#info, #info2 {
   display: flex;
   justify-content: space-between;
 }
@@ -232,7 +258,7 @@
   width: 300px;
 }
 
-#x, #back, #y {
+#x, #back, #y, #z {
   text-decoration: none;
   color: #111;
   display: block;

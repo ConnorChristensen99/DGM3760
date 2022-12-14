@@ -2,6 +2,7 @@
 let interestedBooks = [
 ]
 
+
 async function getBooks() {
     let response = await fetch('/books')
     let data = await response.json()
@@ -11,19 +12,26 @@ async function getBooks() {
 
 let searchForm = document.getElementById('search-form')
 let addBtn = document.getElementById('add-book-btn')
+let addListBtn = document.getElementById('addListFinal')
+let addList = document.getElementById('addList')
+let addListComplete = document.getElementById('addListComplete')
 
 let removeBtn = document.getElementById('x')
 let removeBtns = document.getElementById('y')
+let removeBtnz = document.getElementById('z')
 let addBookBtn = document.getElementById('addBook')
 let findBookBtn = document.getElementById('findBook')
 
 let bodyCards = document.getElementById('interestedCards')
 
 let searchBook = document.getElementById("searchForm")
+let searchList = document.getElementById("searchFormList")
 let searchedBookSpot = document.getElementById('searchedBooks')
 let shareScreen = document.getElementById('shareScreen')
 let sendBook = document.getElementById('sendBook')
 let sendList = document.getElementById('sendList')
+
+let navList = document.getElementById('navList')
 
 
 
@@ -53,6 +61,13 @@ function displayBooks(interestedBooks) {
 
 displayBooks(interestedBooks)
 
+//Changes the list for the user
+function changeList(elem){
+    console.log(elem)
+    console.log(navList)
+}
+
+
 //Shows the share screen
 function showScreen() {
     shareScreen.classList.remove('invisible')
@@ -70,7 +85,7 @@ function removeBook(id) {
     .then(data => {
         console.log(data)
         displayBooks(interestedBooks)
-        window.location.reload()
+        window.location.reload() 
     }) 
 }
  
@@ -85,6 +100,17 @@ sendBook.addEventListener('click', event => {
     shareScreen.classList.add('invisible')
 })
 
+addListBtn.addEventListener('click', event => {
+    addList.classList.remove('invisible')
+})
+
+addListComplete.addEventListener('click', event => {
+    addList.classList.add('invisible')
+
+    navList.insertAdjacentHTML('beforeend', `<li class="nav2 navItem"><a onclick="changeList(searchList.value)" href="#">${searchList.value}</a></li>`)
+
+})
+
 sendList.addEventListener('click', event => {
     shareScreen.classList.remove('invisible')
 })
@@ -94,6 +120,10 @@ removeBtn.addEventListener('click', event => {
 })
 removeBtns.addEventListener('click', event => {
     shareScreen.classList.add('invisible')
+})
+removeBtnz.addEventListener('click', event => {
+    addList.classList.add('invisible')
+
 })
  
 
