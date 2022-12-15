@@ -1,6 +1,13 @@
 //Interested Books JS
 let interestedBooks = [
+    {
+        bookID: 0,
+        title: 'Harry Potter and the Order of the Phoenix',
+        description: 'Now in his fifth year at Hogwarts, Harry (Daniel Radcliffe) learns that many in the wizarding community do not know the truth of his encounter with Lord Voldemort.',
+        image: "src/images/orderofthephoenix.jpg"
+    }
 ]
+
 
 
 async function getBooks() {
