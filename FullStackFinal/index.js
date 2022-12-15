@@ -23,15 +23,16 @@ const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri = process.env.MONGO_URI;
  
 
+console.log(typeof(uri))
+console.log(uri)
 
-
-mongoose.connect(
-    uri,
+mongoose.connect(uri,
     {
         useNewUrlParser: true
     }
 )
 .then(e => console.log('MongoDB Ready!'))
+.then(e => console.log(typeof(uri)))
 .catch(console.error)
 
 // fetch(`https://www.googleapis.com/books/v1/volumes?q=old+cars&${API}`)
