@@ -99,7 +99,7 @@ app.get('/books', (req, res) => {
 })
 
 app.get('/possibleBooks', (req, res) => {
-    res.send("We got them")
+    res.send(interestedBooks)
 })
  
  
