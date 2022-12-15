@@ -98,9 +98,12 @@ app.get('/books', (req, res) => {
     res.send(interestedBooks)
 })
 
+app.get('/possibleBooks', (req, res) => {
+    res.send("We got them")
+})
  
  
-app.post('/books', (req, res) => {
+app.post('/possibleBooks', (req, res) => {
     let possibleBooks = [{}]
 
     let title = req.body.bookTitle

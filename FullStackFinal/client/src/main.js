@@ -139,7 +139,7 @@ findBookBtn.addEventListener('click', event => {
     let id = interestedBooks.length
 
     console.log(searchBook.value)
-    fetch('/books', {
+    fetch('/possibleBooks', {
         method: 'POST',
         body: JSON.stringify({bookTitle: searchBook.value}),
         headers: {
