@@ -26,7 +26,7 @@ const uri = "mongodb+srv://connorchristensen:jAGAS9U54UJC2zHI@books.aaepri8.mong
 mongoose.connect(uri,
     {
         useNewUrlParser: true
-    }
+    } 
 )
 .then(e => console.log('MongoDB Ready!'))
 .then(e => console.log(typeof(uri)))
@@ -98,7 +98,7 @@ app.get('/books', (req, res) => {
     res.send(interestedBooks)
 })
 
-
+ 
  
 app.post('/possibleBooks', (req, res) => {
     let possibleBooks = [{}]

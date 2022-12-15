@@ -1,11 +1,11 @@
 //Interested Books JS
 let interestedBooks = [
-    {
-        bookID: 0,
-        title: 'Harry Potter and the Order of the Phoenix',
-        description: 'Now in his fifth year at Hogwarts, Harry (Daniel Radcliffe) learns that many in the wizarding community do not know the truth of his encounter with Lord Voldemort.',
-        image: "src/images/orderofthephoenix.jpg"
-    }
+    // {
+    //     bookID: 0,
+    //     title: 'Harry Potter and the Order of the Phoenix',
+    //     description: 'Now in his fifth year at Hogwarts, Harry (Daniel Radcliffe) learns that many in the wizarding community do not know the truth of his encounter with Lord Voldemort.',
+    //     image: "src/images/orderofthephoenix.jpg"
+    // }
 ]
 
 
@@ -137,6 +137,8 @@ removeBtnz.addEventListener('click', event => {
 //Finds a book
 findBookBtn.addEventListener('click', event => {
     let id = interestedBooks.length
+
+    console.log(searchBook.value)
     fetch('/possibleBooks', {
         method: 'POST',
         body: JSON.stringify({bookTitle: searchBook.value}),
