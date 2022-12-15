@@ -20,7 +20,7 @@ const API = process.env.API_KEY;
  
 
 const { MongoClient, ServerApiVersion } = require('mongodb');
-const uri = process.env.MONGO_URI;
+const uri = "mongodb+srv://connorchristensen:jAGAS9U54UJC2zHI@books.aaepri8.mongodb.net/?retryWrites=true&w=majority"
  
 
 console.log(typeof(uri))
