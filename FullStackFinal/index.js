@@ -23,9 +23,6 @@ const { MongoClient, ServerApiVersion } = require('mongodb');
 const uri = "mongodb+srv://connorchristensen:jAGAS9U54UJC2zHI@books.aaepri8.mongodb.net/?retryWrites=true&w=majority"
  
 
-console.log(typeof(uri))
-console.log(uri)
-
 mongoose.connect(uri,
     {
         useNewUrlParser: true
