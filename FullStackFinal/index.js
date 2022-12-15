@@ -100,7 +100,7 @@ app.get('/books', (req, res) => {
 
  
  
-app.post('/possibleBooks', (req, res) => {
+app.post('/books', (req, res) => {
     let possibleBooks = [{}]
 
     let title = req.body.bookTitle
